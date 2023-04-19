@@ -77,6 +77,9 @@ CREATE TABLE IF NOT EXISTS BonCommande(
     dateCreation DATETIME DEFAULT CURRENT_TIMESTAMP,
     CodeC VARCHAR(70),
     EtatCommande VARCHAR(70),
+    CommandeStandard BOOLEAN,
+    NomStandard VARCHAR(100),
+    Personalisé VARCHAR(100), 
     PRIMARY KEY(codeC,dateCreation),
     FOREIGN KEY(CodeC) REFERENCES clients(courriel)
 );

@@ -8,15 +8,10 @@ namespace TESTCONSOLE
             string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
            
       
-    
-
-    #region Choix Standart
-
-    
-
-
-
-    #endregion
+        clients c = new clients();
+        Commande commande = new Commande(c);
+        commande.CommandeStandart();
+        
 
     
     }
