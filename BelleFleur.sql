@@ -100,7 +100,7 @@ INSERT INTO `fleur`.`commande_standard` (`nom`,`Compo_Fleur`,`prix`,`categorie`)
 
 
 
+SELECT * FROM clients where courriel = '155555555555555555' and mdp= '1';
 
-
-
+SELECT * FROM commande_standard
 #CALL ajout_clients('test', 'test', 10, 'test@test.com', 'mdp', '34 rue', 101010);
