@@ -49,15 +49,15 @@ namespace TESTCONSOLE
                 string[] valueString = new string[reader.FieldCount];
                 System.Console.WriteLine("Voici les commandes disponibles");
                 while(reader.Read()){
-                    for(int i=0;i<reader.FieldCount;i++){
-                        System.Console.Write(reader.GetValue(i).ToString()+" || ");
-                        System.Console.Write(reader.GetValue(i+1).ToString()+" || ");
-                        System.Console.Write(reader.GetValue(i+2).ToString()+" || ");
+                    for(int i=0;i<(reader.FieldCount*5)-3;i++){
+                        System.Console.Write(reader.GetValue(i).ToString()+" |1| ");
+                        System.Console.Write(reader.GetValue(i+1).ToString()+" |2| ");
+                        System.Console.Write(reader.GetValue(i+2).ToString()+" |3| ");
                         System.Console.Write(reader.GetValue(i+3).ToString());
                         System.Console.WriteLine();
                     }
                 }
-                connection.Close();
+                
                 System.Console.WriteLine("Quelle commande voulez vous? Veuiller écrire le nom exacte");
                 string choix ="";
                 Debut:

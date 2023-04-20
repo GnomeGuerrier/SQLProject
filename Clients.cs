@@ -11,8 +11,9 @@ namespace TESTCONSOLE
         public string mdp;
         public string adresse_facturation;
         public int carte_credit;
+        string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
         public clients(){
-            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
+            
              #region add client
         using (MySqlConnection connection = new MySqlConnection(connectionString))
         {
@@ -71,7 +72,40 @@ namespace TESTCONSOLE
     #endregion
         }
 
+        public clients(string courrielAtester, string mdpAtester){
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+                MySqlCommand cmd = connection.CreateCommand();
+                try{
+                    cmd.CommandText = "SELECT * FROM clients where courriel='"+courrielAtester+"' and mdp='"+mdpAtester+"';";
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    bool exists=false;
+                    while(reader.Read()){
+                        if(reader.GetValue(0).ToString()!=null &&reader.GetValue(0).ToString()!=""){
+                            exists = true;
+                            
+                            this.nom=reader.GetValue(0).ToString();
+                            this.prenom=reader.GetValue(1).ToString();
+                            this.num=Convert.ToInt32(reader.GetValue(2));
+                            this.courriel = reader.GetValue(3).ToString();
+                            this.mdp = reader.GetValue(4).ToString();
+                            this.adresse_facturation = reader.GetValue(5).ToString();
+                            this.num=Convert.ToInt32(reader.GetValue(6));
+                            System.Console.WriteLine("Connecté!");
+                        }
+                        else{
+                            System.Console.WriteLine("Vous n'existez pas, veuillez renter un bon courriel et mdp")
+                            ;
+                        }
+                    }
+                    
 
+                connection.Close();
+                }catch(Exception e){
+                    System.Console.WriteLine(e);
+                }
+                
+        }
 
 
 
