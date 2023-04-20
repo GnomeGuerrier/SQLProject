@@ -65,6 +65,7 @@ namespace TESTCONSOLE
             {
                 System.Console.WriteLine("error");
             }
+            connection.Close();
         }
     }
     #endregion

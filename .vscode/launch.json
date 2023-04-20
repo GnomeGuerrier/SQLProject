@@ -12,7 +12,7 @@
             "program": "${workspaceFolder}/bin/Debug/net7.0/TESTCONSOLE.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         },
         {

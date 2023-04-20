@@ -10,7 +10,7 @@ namespace TESTCONSOLE
       
         clients c = new clients();
         Commande commande = new Commande(c);
-        commande.CommandeStandart();
+        commande.CommandeStandard();
         
 
     

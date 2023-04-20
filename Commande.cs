@@ -34,7 +34,7 @@ namespace TESTCONSOLE
 
 
         }
-        public void CommandeStandart(){
+        public void CommandeStandard(){
             MySqlConnection connection = new MySqlConnection(connectionString);
             System.Console.WriteLine("Voulez vous un bouquet standart ou personalisé [S/P]");
             if(Console.ReadLine()=="S"){
@@ -49,14 +49,15 @@ namespace TESTCONSOLE
                 string[] valueString = new string[reader.FieldCount];
                 System.Console.WriteLine("Voici les commandes disponibles");
                 while(reader.Read()){
-                    for(int i=0;i<reader.FieldCount-4;i++){
+                    for(int i=0;i<reader.FieldCount;i++){
                         System.Console.Write(reader.GetValue(i).ToString()+" || ");
                         System.Console.Write(reader.GetValue(i+1).ToString()+" || ");
-                        System.Console.Write(reader.GetValue(i+1).ToString()+" || ");
-                        System.Console.Write(reader.GetValue(i+1).ToString());
+                        System.Console.Write(reader.GetValue(i+2).ToString()+" || ");
+                        System.Console.Write(reader.GetValue(i+3).ToString());
                         System.Console.WriteLine();
                     }
                 }
+                connection.Close();
                 System.Console.WriteLine("Quelle commande voulez vous? Veuiller écrire le nom exacte");
                 string choix ="";
                 Debut:
@@ -66,7 +67,7 @@ namespace TESTCONSOLE
                         case("Gros Merci"):
                         string command = "INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`)VALUES('"+this.addresse_livraison+"','"+this.message_accompagnant+"',"+this.dateLivraison+",'"+this.CodeC+"','"+this.EtatCommande+"',"+this.standard+",'"+choix+");";
                         cmd.CommandText = command;
-                        
+                        connection.Close();
                         
                         
                         break;
