@@ -11,9 +11,13 @@ namespace TESTCONSOLE
         public string CodeC;
         public string EtatCommande;
         public bool standard;
+        public string courriel;
+        public string mdp;
         
     string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
         public Commande(clients c){
+            this.mdp=c.mdp;
+            this.courriel = c.courriel;
             System.Console.WriteLine("Veuillez fournir une addresse de facturation");
             this.CodeC = c.courriel;
             System.Console.WriteLine("Voulez vous que votre commande soit livrée à votre addresse de facturation? [Y/N]");
@@ -40,9 +44,9 @@ namespace TESTCONSOLE
         public void CommandeStandard(){
             this.standard = true;
             MySqlConnection connection = new MySqlConnection(connectionString);
-            System.Console.WriteLine("Voulez vous un bouquet standart ou personalisé [S/P]");
-            if(Console.ReadLine()=="S"){
-                standard = false;
+            
+            
+               
                 connection.Open();
                 MySqlCommand cmd = connection.CreateCommand();
 
@@ -83,7 +87,31 @@ namespace TESTCONSOLE
     
                 
 
-            }
+            
         }
+
+
+
+        public void AjoutBouquetMois(){
+            MySqlConnection connection2 = new MySqlConnection(this.connectionString);
+            connection2.Open();
+
+            string cm = "UPDATE clients SET nbBouquetMois = nbBouquetMois+1 WHERE courriel='"+this.courriel+"' and mdp ='"+this.mdp+"';";
+                        MySqlCommand cmd2 = connection2.CreateCommand();
+                        cmd2.CommandText=cm;
+                        cmd2.ExecuteNonQuery();
+                        connection2.Close();
+
+
+
+        }
+        public void CommandePersonalise(string magasin){
+
+
+
+
+    
+    
+    }
     }
 }

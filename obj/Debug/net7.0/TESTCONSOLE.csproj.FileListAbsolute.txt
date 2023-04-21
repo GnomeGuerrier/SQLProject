@@ -75,3 +75,4 @@ C:\Users\hbonn\Source\Repos\GnomeGuerrier\SQLProject\obj\Debug\net7.0\TESTCONSOL
 C:\Users\hbonn\Source\Repos\GnomeGuerrier\SQLProject\obj\Debug\net7.0\TESTCONSOLE.csproj.CopyComplete
 C:\Users\hbonn\Source\Repos\GnomeGuerrier\SQLProject\obj\Debug\net7.0\TESTCONSOLE.genruntimeconfig.cache
 C:\Users\hbonn\Source\Repos\GnomeGuerrier\SQLProject\obj\Debug\net7.0\ref\TESTCONSOLE.dll
+C:\Users\eliot\OneDrive\Documents\Cours ESILV\A2\S4\Données\TESTCONSOLE\bin\Debug\net7.0\System.IO.Pipelines.dll
