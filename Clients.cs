@@ -73,6 +73,60 @@ namespace TESTCONSOLE
     #endregion
         }
 
+    public clients(string nomDonne, string prenomDonne, int num_tel, string courrielDonne, string mdpDonne,string addresseDonne, int carteDonne){
+            
+             #region add client
+        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        {
+
+
+        
+        connection.Open();
+
+        using (MySqlCommand cmd = new MySqlCommand("ajout_clients", connection))
+        {
+            cmd.CommandType = CommandType.StoredProcedure;
+            this.nom=nomDonne;
+            cmd.Parameters.AddWithValue("@nom", nomDonne);
+            this.prenom = prenomDonne;
+            cmd.Parameters.AddWithValue("@prenom", prenomDonne);
+            this.num = num_tel;
+            cmd.Parameters.AddWithValue("@num_tel", num_tel);
+            this.courriel = courrielDonne;
+            cmd.Parameters.AddWithValue("@courriel", courrielDonne);
+            this.adresse_facturation = addresseDonne;
+            this.mdp = mdpDonne;
+            cmd.Parameters.AddWithValue("@mdp", mdpDonne);
+            
+            cmd.Parameters.AddWithValue("@adresse_facturation", addresseDonne);
+            this.carte_credit=carteDonne;
+            cmd.Parameters.AddWithValue("@carte_credit", carteDonne);
+
+           MySqlParameter messageParam = new MySqlParameter("@message", MySqlDbType.VarChar, 255);
+            messageParam.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(messageParam);
+                    cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                   string messages=null;
+            while(reader.Read()){
+                 messages= (string)reader[0]; 
+            }
+            
+            System.Console.WriteLine(messages);
+            if (messages== null||messages=="")
+            {
+                Console.WriteLine("Client added successfully."+ messages);
+            }
+            else
+            {
+                System.Console.WriteLine("error");
+            }
+            connection.Close();
+        }
+    }
+    #endregion
+        }
+
         public clients(string courrielAtester, string mdpAtester){
                 MySqlConnection connection = new MySqlConnection(connectionString);
                 connection.Open();
