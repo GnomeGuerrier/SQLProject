@@ -12,7 +12,7 @@ namespace TESTCONSOLE
         public string adresse_facturation;
         public int carte_credit;
         string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
-        bool exists = false;
+        bool exists=false;
         public clients(){
             
              #region add client
@@ -53,13 +53,13 @@ namespace TESTCONSOLE
             cmd.Parameters.Add(messageParam);
                     cmd.ExecuteNonQuery();
                     MySqlDataReader reader = cmd.ExecuteReader();
-                    string messages = "avant requete";
+                   string messages=null;
             while(reader.Read()){
                  messages= (string)reader[0]; 
             }
             
             System.Console.WriteLine(messages);
-            if (messages== null)
+            if (messages== null||messages=="")
             {
                 Console.WriteLine("Client added successfully."+ messages);
             }
@@ -80,7 +80,7 @@ namespace TESTCONSOLE
                 try{
                     cmd.CommandText = "SELECT * FROM clients where courriel='"+courrielAtester+"' and mdp='"+mdpAtester+"';";
                     MySqlDataReader reader = cmd.ExecuteReader();
-
+                    
                     while(reader.Read()){
                         if(reader.GetValue(0).ToString()!=null &&reader.GetValue(0).ToString()!=""){
                             this.exists = true;
