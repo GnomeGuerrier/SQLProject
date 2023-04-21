@@ -78,6 +78,7 @@ namespace TESTCONSOLE
             Console.WriteLine("\n\nEntrez votre mot-de-passe :\n");
             Console.ForegroundColor = ConsoleColor.Blue;
             string mdp = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
 
 
             clients c = new clients(courriel, mdp);
