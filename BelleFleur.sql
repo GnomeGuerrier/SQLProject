@@ -64,8 +64,21 @@ END //
 DELIMITER ;
 
 
-
-
+DROP TABLE IF EXISTS MAGASIN;
+CREATE TABLE IF NOT EXISTS MAGASIN(
+nom VARCHAR(40) PRIMARY KEY
+);
+ DROP TABLE IF EXISTS STOCK;
+ CREATE TABLE IF NOT EXISTS STOCK(
+    Gerbera INTEGER,
+    IdMagasin VARCHAR (40),
+    Ginger INTEGER,
+    Glaieul INTEGER,
+    Marguerite INTEGER,
+    Rose_rouge INTEGER,
+    PRIMARY KEY (IdMagasin),
+    FOREIGN KEY (IdMagasin) REFERENCES MAGASIN(nom)
+ );
 
 
 
@@ -79,7 +92,7 @@ CREATE TABLE IF NOT EXISTS BonCommande(
     EtatCommande VARCHAR(70),
     CommandeStandard BOOLEAN,
     NomStandard VARCHAR(100),
-    Personalisé VARCHAR(100), 
+    Personalisé VARCHAR(500), 
     PRIMARY KEY(codeC,dateCreation),
     FOREIGN KEY(CodeC) REFERENCES clients(courriel)
 );
@@ -98,9 +111,18 @@ INSERT INTO `fleur`.`commande_standard` (`nom`,`Compo_Fleur`,`prix`,`categorie`)
 INSERT INTO `fleur`.`commande_standard` (`nom`,`Compo_Fleur`,`prix`,`categorie`)VALUES('Maman','Arrangement floral avec gerbera,roses blanches, lys et alstroméria',80,'Fête des mères');
 INSERT INTO `fleur`.`commande_standard` (`nom`,`Compo_Fleur`,`prix`,`categorie`)VALUES('Vive la mariée','Arrangement floral avec lys et orchidées',109,'Mariage');
 
-
+INSERT INTO magasin(nom) VALUES ('Paris');
+INSERT INTO magasin(nom) VALUES ('Marseille');
+INSERT INTO magasin(nom) VALUES ('Lyon');
+INSERT INTO magasin(nom) VALUES ('Annecy');
+INSERT INTO magasin(nom) VALUES ('Lille');
 
 SELECT * FROM clients where courriel = '155555555555555555' and mdp= '1';
 
 SELECT * FROM commande_standard
 #CALL ajout_clients('test', 'test', 10, 'test@test.com', 'mdp', '34 rue', 101010);
+
+INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`)VALUES('ff','rr', '2004-01-01','1','ee',true,'GrosMerci');
+
+INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`)VALUES('1','deddededede','2000-01-01','1','',False,'Gros Merci');
+INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`)VALUES('1','frthyjukijvecz','2000-01-01','1','',False,'Gros Merci');
