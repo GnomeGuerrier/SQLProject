@@ -80,12 +80,13 @@ namespace TESTCONSOLE
             string mdp = Console.ReadLine();
 
 
-            // INSERER ICI LA SUITE DE LA CONNEXION
+            clients c = new clients(courriel, mdp);
+            PageClient(c);
 
-
-            Console.WriteLine("\n\n\nTest : " + courriel + "\t" + mdp);
         }
 
+
+        #region Inscription
 
         static void PageInscription()
         {
@@ -121,6 +122,9 @@ namespace TESTCONSOLE
             string mdp = DefinitionMDP();
             Console.WriteLine("\nMot de passe défini : " + mdp);
 
+            clients c = new clients(nom, prenom, tel, courriel, mdp, adresse, carte_credit);
+            PageClient(c);
+
 
         }
 
@@ -147,6 +151,34 @@ namespace TESTCONSOLE
                 mdp1 = DefinitionMDP();
             }
             return mdp1;
+        }
+
+        #endregion
+
+        private static void PageClient(clients c)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("---- Page Client ----");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Vous êtes connecté en tant que " + c.prenom + " " + c.nom);
+            Console.WriteLine("[1] Passer commande\n[2] Se déconnecter\n\nEntrez le numéro de votre choix:\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string choix = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            switch (choix)
+            {
+                case "1":
+                    Commande cm = new Commande(c);
+                    cm.CommandeStandard();
+                    break;
+                case "2":
+                    MainMenu();
+                    break;
+                default:
+                    PageClient(c);
+                    break;
+            }
         }
     }
 }

@@ -14,22 +14,29 @@ namespace TESTCONSOLE
         
     string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
         public Commande(clients c){
-            System.Console.WriteLine("Veuillez fournir une addresse de facturation");
             this.CodeC = c.courriel;
-            System.Console.WriteLine("Voulez vous que votre commande soit livrée à votre addresse de facturation? [Y/N]");
-            
+            System.Console.WriteLine("Voulez vous que votre commande soit livrée à votre addresse de facturation? [Y/N]\n");
+            System.Console.ForegroundColor = ConsoleColor.Blue;
             string msg = Console.ReadLine();
+            System.Console.ForegroundColor = ConsoleColor.White;
             if(msg=="Y"){
                 this.addresse_livraison = c.adresse_facturation;
             }
             else{
-                System.Console.WriteLine("Donner votre addresse de livraison");
-                this.addresse_livraison=Console.ReadLine();  
+                System.Console.WriteLine("\nDonnez votre addresse de livraison :\n");
+                System.Console.ForegroundColor = ConsoleColor.Blue;
+                this.addresse_livraison=Console.ReadLine();
+                System.Console.ForegroundColor = ConsoleColor.White;
             }
-            System.Console.WriteLine("Veuillez donner le message accompagnant");
+            System.Console.WriteLine("\nVeuillez donner le message accompagnant votre bouquet :\n");
+            System.Console.ForegroundColor = ConsoleColor.Blue;
             this.message_accompagnant = Console.ReadLine();
-            System.Console.WriteLine("Veuillez donner une date de livraison [jourjour/moismois/annee]");
+            System.Console.ForegroundColor = ConsoleColor.White;
+
+            System.Console.WriteLine("\nVeuillez donner une date de livraison au format JJ/MM/AAAA\n");
+            System.Console.ForegroundColor = ConsoleColor.Blue;
             this.dateLivraison=DateTime.Parse(Console.ReadLine());
+            System.Console.ForegroundColor = ConsoleColor.White;
             TimeSpan diff = dateLivraison-DateTime.Now.Date;
 
             if(diff.TotalDays<3){
@@ -40,9 +47,8 @@ namespace TESTCONSOLE
         public void CommandeStandard(){
             this.standard = true;
             MySqlConnection connection = new MySqlConnection(connectionString);
-            System.Console.WriteLine("Voulez vous un bouquet standart ou personalisé [S/P]");
-            if(Console.ReadLine()=="S"){
-                standard = false;
+
+
                 connection.Open();
                 MySqlCommand cmd = connection.CreateCommand();
 
@@ -51,19 +57,26 @@ namespace TESTCONSOLE
 
                 MySqlDataReader reader = cmd.ExecuteReader();
                 string[] valueString = new string[reader.FieldCount];
-                System.Console.WriteLine("Voici les commandes disponibles");
+                System.Console.ForegroundColor = ConsoleColor.White;
+                System.Console.WriteLine("Voici les commandes disponibles : ");
                 while(reader.Read()){
                     
-                    for(int i=0;i<reader.FieldCount;i++){
-                        System.Console.Write(reader.GetValue(i).ToString()+" || ");
+                    for(int i=0;i<reader.FieldCount;i++){                                   //Nom bouquets
+                        System.Console.Write(reader.GetValue(i).ToString());
+                        System.Console.ForegroundColor = ConsoleColor.Red;
+                        System.Console.WriteLine("\t||\t");
+                        System.Console.ForegroundColor = ConsoleColor.White;
                         
                         
                     }
                     System.Console.WriteLine();
                 }
                 connection.Close();
-                System.Console.WriteLine("Quelle commande voulez vous? Veuiller écrire le nom exacte");
-                string choix ="";
+                System.Console.Write("Quelle commande voulez vous ?");
+                System.Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine(" \t /!\ CASE SENSITIVE")
+                System.Console.ForegroundColor = ConsoleColor.White;
+                string choix = "";
                 string[] listNom = {"Gros Merci","L amoureux","L exotique","Maman","Vive la mariée"};
                 Debut:
                 choix = Console.ReadLine();
@@ -83,7 +96,7 @@ namespace TESTCONSOLE
     
                 
 
-            }
+            
         }
     }
 }
