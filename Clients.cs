@@ -12,6 +12,7 @@ namespace TESTCONSOLE
         public string adresse_facturation;
         public int carte_credit;
         string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
+        bool exists = false;
         public clients(){
             
              #region add client
@@ -79,10 +80,10 @@ namespace TESTCONSOLE
                 try{
                     cmd.CommandText = "SELECT * FROM clients where courriel='"+courrielAtester+"' and mdp='"+mdpAtester+"';";
                     MySqlDataReader reader = cmd.ExecuteReader();
-                    bool exists=false;
+
                     while(reader.Read()){
                         if(reader.GetValue(0).ToString()!=null &&reader.GetValue(0).ToString()!=""){
-                            exists = true;
+                            this.exists = true;
                             
                             this.nom=reader.GetValue(0).ToString();
                             this.prenom=reader.GetValue(1).ToString();

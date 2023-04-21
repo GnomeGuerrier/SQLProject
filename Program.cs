@@ -52,7 +52,7 @@ namespace TESTCONSOLE
             switch (choix)
             {
                 case "1":
-                    
+                    PageInscription();
                     break;
                 case "2":
                     PageConnexion();
@@ -94,42 +94,59 @@ namespace TESTCONSOLE
             Console.WriteLine("---- Inscription ----");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Bienveue chez Belle Fleur, merci de nous faire confiance !\nInscrivez-vous en répondant aux questions suivantes :");
-            Console.WriteLine("Quel est votre nom ?\n");
+            Console.WriteLine("\nQuel est votre nom ?\n");
             Console.ForegroundColor = ConsoleColor.Blue;
             string nom = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Quel est votre prénom ?\n");
+            Console.WriteLine("\nQuel est votre prénom ?\n");
             Console.ForegroundColor = ConsoleColor.Blue;
             string prenom = Console.ReadLine();
             Console.ForegroundColor= ConsoleColor.White;
-            Console.WriteLine("Quel est votre numéro de téléphone ?\n");
+            Console.WriteLine("\nQuel est votre numéro de téléphone ?\n");
             Console.ForegroundColor = ConsoleColor.Blue;
             string tel = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Quel est votre courriel ?\n");
+            Console.WriteLine("\nQuel est votre courriel ?\n");
             Console.ForegroundColor = ConsoleColor.Blue;
             string courriel = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Quelle est votre adresse ?\n");
+            Console.WriteLine("\nQuelle est votre adresse ?\n");
             Console.ForegroundColor = ConsoleColor.Blue;
             string adresse = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Quel est votre numéro de carte de crédit ?\n");
+            Console.WriteLine("\nQuel est votre numéro de carte de crédit ?\n");
             Console.ForegroundColor = ConsoleColor.Blue;
             string carte_credit = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Enfin, définissez votre mot de passe :\n");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            string courriel = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.White;
+            string mdp = DefinitionMDP();
+            Console.WriteLine("\nMot de passe défini : " + mdp);
+
+
         }
 
-        private string DefinitionMDP()
+        private static string DefinitionMDP()
         {
-            string mdp;
+            Console.WriteLine("\nDéfinissez votre mot-de-passe :\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string mdp1 = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
 
+            Console.WriteLine("\nVérifiez votre mot-de-passe :\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string mdp2 = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
 
-            return mdp;
+            if(mdp1 == mdp2)
+            {
+                return mdp1;
+            }
+            else
+            {
+                Console.WriteLine("Mots de passes différents ! Veuillez ré-essayer !\n\nAppuyez sur une touche");
+                Console.ReadKey();
+                mdp1 = DefinitionMDP();
+            }
+            return mdp1;
         }
     }
 }
