@@ -104,7 +104,7 @@ namespace TESTCONSOLE
             Console.ForegroundColor= ConsoleColor.White;
             Console.WriteLine("\nQuel est votre numéro de téléphone ?\n");
             Console.ForegroundColor = ConsoleColor.Blue;
-            string tel = Console.ReadLine();
+            int tel = Convert.ToInt32(Console.ReadLine());
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\nQuel est votre courriel ?\n");
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -116,7 +116,7 @@ namespace TESTCONSOLE
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\nQuel est votre numéro de carte de crédit ?\n");
             Console.ForegroundColor = ConsoleColor.Blue;
-            string carte_credit = Console.ReadLine();
+            int carte_credit = Convert.ToInt32(Console.ReadLine());
             Console.ForegroundColor = ConsoleColor.White;
             string mdp = DefinitionMDP();
             Console.WriteLine("\nMot de passe défini : " + mdp);
