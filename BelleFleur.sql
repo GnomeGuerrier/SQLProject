@@ -70,8 +70,8 @@ nom VARCHAR(40) PRIMARY KEY
 );
  DROP TABLE IF EXISTS STOCK;
  CREATE TABLE IF NOT EXISTS STOCK(
-    Gerbera INTEGER,
     IdMagasin VARCHAR (40),
+    Gerbera INTEGER,
     Ginger INTEGER,
     Glaieul INTEGER,
     Marguerite INTEGER,
@@ -116,6 +116,13 @@ INSERT INTO magasin(nom) VALUES ('Marseille');
 INSERT INTO magasin(nom) VALUES ('Lyon');
 INSERT INTO magasin(nom) VALUES ('Annecy');
 INSERT INTO magasin(nom) VALUES ('Lille');
+
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Paris',210,190,205,145,120);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Marseille',140,130,250,100,80);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Lyon',230,150,170,170,130);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Annecy',80,70,50,120,70);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Lille',140,170,210,130,100);
+
 
 SELECT * FROM clients where courriel = '155555555555555555' and mdp= '1';
 
