@@ -13,12 +13,17 @@ namespace TESTCONSOLE
             //clients c = new clients();
             //Commande commande = new Commande(c);
             //commande.CommandeStandard();
-            
+
+            clients test = new clients("1","1");
+            Commande ctest = new Commande(test);
+            ctest.CommandePersonalise("Paris");
+
+            /*
             WelcomePage();
             Console.ReadKey();
             MainMenu();
 
-
+*/
 
             Console.ReadKey();
         }

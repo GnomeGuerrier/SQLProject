@@ -70,8 +70,8 @@ nom VARCHAR(40) PRIMARY KEY
 );
  DROP TABLE IF EXISTS STOCK;
  CREATE TABLE IF NOT EXISTS STOCK(
-    Gerbera INTEGER,
     IdMagasin VARCHAR (40),
+    Gerbera INTEGER, 
     Ginger INTEGER,
     Glaieul INTEGER,
     Marguerite INTEGER,
@@ -126,3 +126,11 @@ INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison
 
 INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`)VALUES('1','deddededede','2000-01-01','1','',False,'Gros Merci');
 INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`)VALUES('1','frthyjukijvecz','2000-01-01','1','',False,'Gros Merci');
+
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Paris',210,190,205,145,120);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Marseille',140,130,250,100,80);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Lyon',230,150,170,170,130);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Annecy',80,70,50,120,70);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Lille',140,170,210,130,100);
+
+SELECT * FROM stock where IdMagasin='paris';

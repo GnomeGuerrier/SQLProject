@@ -122,9 +122,95 @@ namespace TESTCONSOLE
 
 
         }
+        
+        
         public void CommandePersonalise(string magasin){
 
+        System.Console.WriteLine("Voulez vous faire une commande personalisée par item, ou une description générale? [item/texte]");
+        if(Console.ReadLine()=="item"){
+            System.Console.WriteLine($"Voici les stocks disponibles pour le magasin {magasin}");
+            System.Console.WriteLine("      Gebera  ginger glaieul magerite rose rouge");
+            MySqlConnection connection = new MySqlConnection(connectionString);
 
+
+                connection.Open();
+                MySqlCommand cmd = connection.CreateCommand();
+
+                int[] stockfleur = new int[5];
+                cmd.CommandText="SELECT * FROM stock where IdMagasin= '"+magasin+"';";
+                cmd.ExecuteNonQuery();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                string[] valueString = new string[reader.FieldCount];
+                while(reader.Read()){
+                    
+                    for(int i=0;i<reader.FieldCount;i++){                                   
+                        System.Console.Write(reader.GetValue(i).ToString());
+                        System.Console.ForegroundColor = ConsoleColor.Red;
+                        System.Console.Write(" || ");
+                        System.Console.ForegroundColor = ConsoleColor.White;
+                        if(i!=0){
+                            stockfleur[i-1]=Convert.ToInt32(reader.GetValue(i));
+                        }
+                        
+                    }
+                    
+                }
+                connection.Close();
+                int[]mois = {5,6,7,8,9,10,11};
+                Commande:
+                System.Console.WriteLine("combien de gerbera voulez vous?" );
+                int gerbera = Convert.ToInt32(Console.ReadLine());
+                System.Console.WriteLine("combien de ginger voulez vous?" );
+                int ginger = Convert.ToInt32(Console.ReadLine());
+                int glaieul=0;
+                if(!Array.Exists(mois, x=>x==dateCreation.Month)){
+                    System.Console.WriteLine("Vous ne pouvez pas commander de glaieul, car ce n'est pas la saison");
+                     glaieul = 0;
+                }
+                else{
+                    System.Console.WriteLine("combien de glaieul voulez vous?" );
+                     glaieul =Convert.ToInt32(Console.ReadLine());
+                }
+                
+                System.Console.WriteLine("combien de margerite voulez vous?" );
+                int margerite = Convert.ToInt32(Console.ReadLine());
+                System.Console.WriteLine("combien de rose voulez vous?" );
+                int rose = Convert.ToInt32(Console.ReadLine());
+                bool stockCorrect=true;
+
+                if(stockfleur[0]-gerbera<0||stockfleur[1]-ginger<0||stockfleur[2]-glaieul<0||stockfleur[3]-margerite<0||stockfleur[4]-rose<0){
+                    System.Console.WriteLine("nous n'avons pas les stocks, veuillez prendre moins de fleur");
+                    goto Commande;
+                }
+                float prix =(float)(gerbera*5+ginger*4+glaieul*1+margerite*2.25+rose*2.5);
+                System.Console.WriteLine("Super! Votre total s'élève à "+prix);
+
+                this.standard = false;
+
+                MySqlConnection connectionperso = new MySqlConnection(connectionString);
+                string personalise = "gerbera : " +gerbera+ "|ginger : "+ginger+" glaieul : "+glaieul+ " margerite :"+margerite+ " Rose rouge : "+rose ;
+                this.EtatCommande="CC";
+                connectionperso.Open();
+                MySqlCommand cmd3 = connectionperso.CreateCommand();
+                cmd3.CommandText="INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`Personalisé`)VALUES('"+this.addresse_livraison+"','"+this.message_accompagnant+"','"+this.dateLivraison.ToString("yyyy'-'MM'-'dd")+"','"+this.CodeC+"','"+this.EtatCommande+"',"+this.standard+",'"+personalise+"');";;
+                cmd3.ExecuteNonQuery();
+                connectionperso.Close();
+               
+        }
+        else{
+            
+                MySqlConnection connectionperso = new MySqlConnection(connectionString);
+                this.standard = false;
+                System.Console.WriteLine("Décriver le bouquet que vous voulez");
+                string personalise = Console.ReadLine();
+                this.EtatCommande="CPAV";
+                connectionperso.Open();
+                MySqlCommand cmd3 = connectionperso.CreateCommand();
+                cmd3.CommandText="INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`Personalisé`)VALUES('"+this.addresse_livraison+"','"+this.message_accompagnant+"','"+this.dateLivraison.ToString("yyyy'-'MM'-'dd")+"','"+this.CodeC+"','"+this.EtatCommande+"',"+this.standard+",'"+personalise+"');";;
+                cmd3.ExecuteNonQuery();
+                connectionperso.Close();
+
+        }
 
 
     
