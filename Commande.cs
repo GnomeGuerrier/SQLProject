@@ -15,7 +15,7 @@ namespace TESTCONSOLE
         public string mdp;
         
     string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
-        public Commande(clients c){
+        public Commande(Clients c){
             this.mdp=c.mdp;
             this.courriel = c.courriel;
             System.Console.WriteLine("Veuillez fournir une addresse de facturation");
@@ -113,7 +113,7 @@ namespace TESTCONSOLE
             MySqlConnection connection2 = new MySqlConnection(this.connectionString);
             connection2.Open();
 
-            string cm = "UPDATE clients SET nbBouquetMois = nbBouquetMois+1 WHERE courriel='"+this.courriel+"' and mdp ='"+this.mdp+"';";
+            string cm = "UPDATE Clients SET nbBouquetMois = nbBouquetMois+1 WHERE courriel='"+this.courriel+"' and mdp ='"+this.mdp+"';";
                         MySqlCommand cmd2 = connection2.CreateCommand();
                         cmd2.CommandText=cm;
                         cmd2.ExecuteNonQuery();

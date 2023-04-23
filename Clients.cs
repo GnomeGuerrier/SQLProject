@@ -3,7 +3,7 @@ using System.Data;
 
 namespace TESTCONSOLE
 {
-    public class clients{
+    public class Clients{
         public string nom;
         public string prenom;
         public int num;
@@ -12,8 +12,8 @@ namespace TESTCONSOLE
         public string adresse_facturation;
         public int carte_credit;
         string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
-        bool exists=false;
-        public clients(){
+        public bool exists=false;
+        public Clients(){
             
              #region add client
         using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -73,7 +73,7 @@ namespace TESTCONSOLE
     #endregion
         }
 
-    public clients(string nomDonne, string prenomDonne, int num_tel, string courrielDonne, string mdpDonne,string addresseDonne, int carteDonne){
+    public Clients(string nomDonne, string prenomDonne, int num_tel, string courrielDonne, string mdpDonne,string addresseDonne, int carteDonne){
             
              #region add client
         using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -127,14 +127,14 @@ namespace TESTCONSOLE
     #endregion
         }
 
-        public clients(string courrielAtester, string mdpAtester){
+        public Clients(string courrielAtester, string mdpAtester){
                 MySqlConnection connection = new MySqlConnection(connectionString);
                 connection.Open();
                 MySqlCommand cmd = connection.CreateCommand();
                 try{
-                    cmd.CommandText = "SELECT * FROM clients where courriel='"+courrielAtester+"' and mdp='"+mdpAtester+"';";
+                    cmd.CommandText = "SELECT * FROM Clients where courriel='"+courrielAtester+"' and mdp='"+mdpAtester+"';";
+                    cmd.ExecuteNonQuery();
                     MySqlDataReader reader = cmd.ExecuteReader();
-                    
                     while(reader.Read()){
                         if(reader.GetValue(0).ToString()!=null &&reader.GetValue(0).ToString()!=""){
                             this.exists = true;
@@ -157,7 +157,7 @@ namespace TESTCONSOLE
 
                 connection.Close();
                 }catch(Exception e){
-                    System.Console.WriteLine(e);
+                    //System.Console.WriteLine(e);
                 }
                 
         }
