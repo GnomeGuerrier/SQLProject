@@ -50,8 +50,8 @@ namespace TESTCONSOLE
 
         }
         public void CommandeStandard(){
-            this.standard = true;
-            MySqlConnection connection = new MySqlConnection(connectionString);
+                 this.standard = true;
+                MySqlConnection connection = new MySqlConnection(connectionString);
 
 
                 connection.Open();
@@ -80,6 +80,7 @@ namespace TESTCONSOLE
                 System.Console.Write("Quelle commande voulez vous ?");
                 System.Console.ForegroundColor = ConsoleColor.Red;
                 System.Console.WriteLine(" \t /!/ CASE SENSITIVE");
+                System.Console.WriteLine(" \t /!/ CASE SENSITIVE");
                 System.Console.ForegroundColor = ConsoleColor.White;
                 string choix = "";
                 string[] listNom = {"Gros Merci","L amoureux","L exotique","Maman","Vive la mariée"};
@@ -92,7 +93,7 @@ namespace TESTCONSOLE
                 else{
                     string command = "INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`)VALUES('"+this.addresse_livraison+"','"+this.message_accompagnant+"','"+this.dateLivraison.ToString("yyyy'-'MM'-'dd")+"','"+this.CodeC+"','"+this.EtatCommande+"',"+this.standard+",'"+choix+"');";
                         
-                        connection.Open();
+                       connection.Open();
                         MySqlCommand cmd1 = connection.CreateCommand();
                         cmd1.CommandText=command;
                         cmd1.ExecuteNonQuery();
