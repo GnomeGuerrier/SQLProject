@@ -6,8 +6,8 @@ USE FLEUR;
 set sql_safe_updates = 0 ;
 SET GLOBAL LOCAL_INFILE = 'ON';
 
-Drop TABLE IF EXISTS clients;
-CREATE TABLE IF NOT EXISTS clients(
+Drop TABLE IF EXISTS Clients;
+CREATE TABLE IF NOT EXISTS Clients(
 nom VARCHAR(40),
 prenom VARCHAR(40),
 num_tel INTEGER,
@@ -35,10 +35,10 @@ CREATE PROCEDURE IF NOT EXISTS ajout_clients(
 BEGIN
     IF NOT EXISTS (
         SELECT 1
-        FROM clients
-        WHERE clients.courriel = courriel
+        FROM Clients
+        WHERE Clients.courriel = courriel
     ) THEN
-        INSERT INTO clients (
+        INSERT INTO Clients (
             nom,
             prenom,
             num_tel,
@@ -71,7 +71,7 @@ nom VARCHAR(40) PRIMARY KEY
  DROP TABLE IF EXISTS STOCK;
  CREATE TABLE IF NOT EXISTS STOCK(
     IdMagasin VARCHAR (40),
-    Gerbera INTEGER, 
+    Gerbera INTEGER,
     Ginger INTEGER,
     Glaieul INTEGER,
     Marguerite INTEGER,
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS BonCommande(
     NomStandard VARCHAR(100),
     Personalisé VARCHAR(500), 
     PRIMARY KEY(codeC,dateCreation),
-    FOREIGN KEY(CodeC) REFERENCES clients(courriel)
+    FOREIGN KEY(CodeC) REFERENCES Clients(courriel)
 );
 DROP TABLE IF EXISTS commande_standard;
 CREATE TABLE IF NOT EXISTS commande_standard(
@@ -105,6 +105,14 @@ CREATE TABLE IF NOT EXISTS commande_standard(
     PRIMARY KEY(nom)
     
 );
+
+DROP TABLE IF EXISTS administrateurs;
+CREATE TABLE IF NOT EXISTS administrateurs(
+    pseudo VARCHAR(20),
+    mot_de_passe VARCHAR(20),
+    PRIMARY KEY(IdAdmin)
+);
+
 INSERT INTO `fleur`.`commande_standard` (`nom`,`Compo_Fleur`,`prix`,`categorie`)VALUES ('Gros Merci','Arrangement floral avec marguerites et verdure',45,'toute occasion');
 INSERT INTO `fleur`.`commande_standard` (`nom`,`Compo_Fleur`,`prix`,`categorie`)VALUES('L amoureux','Arrangement floral avec roses blanches et roses rouges',65,'Saint Valentin');
 INSERT INTO `fleur`.`commande_standard` (`nom`,`Compo_Fleur`,`prix`,`categorie`)VALUES('L exotique','Arrangement floral avec ginger,oiseaux du paradis, roses et genet',40,'Toute Occasion');
@@ -117,7 +125,14 @@ INSERT INTO magasin(nom) VALUES ('Lyon');
 INSERT INTO magasin(nom) VALUES ('Annecy');
 INSERT INTO magasin(nom) VALUES ('Lille');
 
-SELECT * FROM clients where courriel = '155555555555555555' and mdp= '1';
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Paris',210,190,205,145,120);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Marseille',140,130,250,100,80);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Lyon',230,150,170,170,130);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Annecy',80,70,50,120,70);
+INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Lille',140,170,210,130,100);
+
+
+SELECT * FROM Clients where courriel = '155555555555555555' and mdp= '1';
 
 SELECT * FROM commande_standard
 #CALL ajout_clients('test', 'test', 10, 'test@test.com', 'mdp', '34 rue', 101010);

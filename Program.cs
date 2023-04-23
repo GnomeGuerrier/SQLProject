@@ -1,7 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
-
+using System.Runtime.Serialization;
 
 namespace TESTCONSOLE
 {
@@ -10,7 +10,7 @@ namespace TESTCONSOLE
             string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
 
 
-            //clients c = new clients();
+            //Clients c = new Clients();
             //Commande commande = new Commande(c);
             //commande.CommandeStandard();
 
@@ -48,7 +48,7 @@ namespace TESTCONSOLE
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("---- Menu Principal ----\n\n\n");
+            Console.WriteLine("---- Menu Principal ----\n\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("[1] Inscription\n[2] Connexion\n[3] Connexion Admin\n\nEntrez le numéro de votre choix:\n");
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -63,6 +63,7 @@ namespace TESTCONSOLE
                     PageConnexion();
                     break;
                 case "3":
+                    PageAdmin();
                     break;
                 default:
                     MainMenu();
@@ -72,6 +73,7 @@ namespace TESTCONSOLE
 
         static void PageConnexion()
         {
+            Debut:
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("---- Connexion ----");
@@ -86,7 +88,26 @@ namespace TESTCONSOLE
             Console.ForegroundColor = ConsoleColor.White;
 
 
-            clients c = new clients(courriel, mdp);
+            Clients c = new Clients(courriel, mdp);
+            if (c.exists == false)
+            {
+                Console.WriteLine("Informations erronées :\n[1] Réessayer\n[2] Menu Principal");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                string choix = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                switch (choix)
+                {
+                    case "1":
+                        goto Debut;
+                        break;
+                    case "2":
+                        MainMenu();
+                        break;
+                    default:
+                        goto Debut;
+                        break;
+                }
+            }
             PageClient(c);
 
         }
@@ -128,13 +149,13 @@ namespace TESTCONSOLE
             string mdp = DefinitionMDP();
             Console.WriteLine("\nMot de passe défini : " + mdp);
 
-            clients c = new clients(nom, prenom, tel, courriel, mdp, adresse, carte_credit);
+            Clients c = new Clients(nom, prenom, tel, courriel, mdp, adresse, carte_credit);
             PageClient(c);
 
 
         }
 
-        private static string DefinitionMDP()
+        public static string DefinitionMDP()
         {
             Console.WriteLine("\nDéfinissez votre mot-de-passe :\n");
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -161,7 +182,7 @@ namespace TESTCONSOLE
 
         #endregion
 
-        private static void PageClient(clients c)
+        private static void PageClient(Clients c)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -186,5 +207,116 @@ namespace TESTCONSOLE
                     break;
             }
         }
+
+
+        #region Administration
+
+        private static void PageAdmin()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("---- Page Admin ----\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("[1] Connectez vous comme administrateur\n[2] Inscription comme administrateur\n\nEntrez le numéro de votre choix:\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string choix = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            switch (choix)
+            {
+                case "1":
+                    ConnexionAdmin();
+                    break;
+                case "2":
+                    InscriptionAdmin();
+                    break;
+                default:
+                    PageAdmin();
+                    break;
+            }
+        }
+
+        private static void InscriptionAdmin()
+        {
+            
+
+            Admin A = new Admin();
+            Console.WriteLine("Votre ID Administrateur est : " + A.idAdmin);
+            Console.WriteLine("Retenez votre ID, il vous sera util pour vous connecter !");
+            Console.WriteLine("Appuyez sur une touche pour continuer...");
+            Console.ReadKey();
+            InterfaceAdmin(A);
+
+        }
+
+        static void ConnexionAdmin()
+        {
+            Debut:
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("---- Connexion Admin ----\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n\nEntrez votre ID Administrateur :\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string id = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n\nEntrez votre mot-de-passe :\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string mdp = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
+
+
+            Admin A = new Admin(id, mdp);
+            if (A.exists == false)
+            {
+                Console.WriteLine("Informations erronées :\n[1] Réessayer\n[2] Menu Principal");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                string choix = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                switch (choix)
+                {
+                    case "1":
+                        goto Debut;
+                        break;
+                    case "2":
+                        MainMenu();
+                        break;
+                    default:
+                        goto Debut;
+                        break;
+                }
+            }
+            InterfaceAdmin(A);
+
+        }
+
+        private static void InterfaceAdmin(Admin A)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("---- Interface Admin ----\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Vous êtes connecté en tant que " + A.pseudo + " | ID = " + A.idAdmin);
+            Console.WriteLine("[1] Accéder aux statistiques\n[2] Changer l'état d'une commande\n[3] Se déconnecter\n\nEntrez le numéro de votre choix:\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string choix = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            switch (choix)
+            {
+                case "1":
+                    InterfaceAdmin(A);
+                    break;
+                case "2":
+                    InterfaceAdmin(A);
+                    break;
+                case "3":
+                    MainMenu();
+                    break;
+                default:
+                    InterfaceAdmin(A);
+                    break;
+            }
+        }
+
+        #endregion
     }
 }
