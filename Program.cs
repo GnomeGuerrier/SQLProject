@@ -14,7 +14,7 @@ namespace TESTCONSOLE
             //Commande commande = new Commande(c);
             //commande.CommandeStandard();
 
-            clients test = new clients("1","1");
+            Clients test = new Clients("1","1");
             Commande ctest = new Commande(test);
             ctest.CommandePersonalise("Paris");
 
@@ -22,8 +22,8 @@ namespace TESTCONSOLE
             WelcomePage();
             Console.ReadKey();
             MainMenu();
-
 */
+
 
             Console.ReadKey();
         }

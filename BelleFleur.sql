@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS commande_standard(
 
 DROP TABLE IF EXISTS administrateurs;
 CREATE TABLE IF NOT EXISTS administrateurs(
+    IdAdmin INTEGER,
     pseudo VARCHAR(20),
     mot_de_passe VARCHAR(20),
     PRIMARY KEY(IdAdmin)
@@ -149,3 +150,4 @@ INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerit
 INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Lille',140,170,210,130,100);
 
 SELECT * FROM stock where IdMagasin='paris';
+
