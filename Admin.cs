@@ -123,6 +123,42 @@ namespace TESTCONSOLE
         }
 
 
+        public void Stats(){
+
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlCommand cmd = connection.CreateCommand();
+            connection.Open();
+            cmd.CommandText="SELECT * FROM clients where nbBouquetMois=(select max(nbBouquetMois) from clients) ;"; //Meilleur client
+            cmd.ExecuteNonQuery();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            string[] valueString = new string[reader.FieldCount];
+
+            while(reader.Read()){
+                    for(int i=0;i<reader.FieldCount;i++){                                   
+                        System.Console.Write(reader.GetValue(i).ToString());
+                    }
+            }
+            connection.Close();
+
+
+
+            connection.Open();
+            cmd.CommandText="SELECT NomStandard, COUNT(NomStandard) AS TotalBought FROM BonCommande WHERE CommandeStandard = TRUE GROUP BY NomStandard ORDER BY TotalBought DESC LIMIT 1;";
+            cmd.ExecuteNonQuery();
+            reader = cmd.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+           
+           System.Console.WriteLine("----------------");
+            while(reader.Read()){
+                    for(int i=0;i<reader.FieldCount;i++){                                   
+                        System.Console.Write(reader.GetValue(i).ToString());  //Quel est le bouquet standard qui a eu le plus de succès ? 
+
+                    }
+            }
+            connection.Close();
+        
+        }
     }
 
 
