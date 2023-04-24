@@ -100,6 +100,7 @@ namespace TESTCONSOLE
                         connection.Close();
                         System.Console.ForegroundColor = ConsoleColor.White;
                         System.Console.WriteLine("\nLa commande a bien été passée ! Merci pour votre achat !\n");
+                        System.Console.WriteLine("\nAppuyez sur une touche pour continuer...");
                 }
     
                 
@@ -124,13 +125,15 @@ namespace TESTCONSOLE
         }
         
         
-        public void CommandePersonalise(string magasin){
+        public void CommandePersonalisee(string magasin){
 
-        System.Console.WriteLine("Voulez vous faire une commande personalisée par item, ou une description générale? [item/texte]");
-        if(Console.ReadLine()=="item"){
-            System.Console.WriteLine($"Voici les stocks disponibles pour le magasin {magasin}");
-            System.Console.WriteLine("      Gebera  ginger glaieul magerite rose rouge");
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            System.Console.WriteLine("Voulez-vous faire une commande personalisée par item, ou une description générale? [item/texte]\n");
+            System.Console.ForegroundColor = ConsoleColor.Blue;
+            if (Console.ReadLine()=="item"){
+                System.Console.ForegroundColor = ConsoleColor.White;
+                System.Console.WriteLine($"Voici les stocks disponibles pour le magasin {magasin}");
+                System.Console.WriteLine("      Gebera  Ginger Glaieul Marguerite Rose_rouge");
+                MySqlConnection connection = new MySqlConnection(connectionString);
 
 
                 connection.Open();
@@ -157,38 +160,50 @@ namespace TESTCONSOLE
                 }
                 connection.Close();
                 int[]mois = {5,6,7,8,9,10,11};
-                Commande:
-                System.Console.WriteLine("combien de gerbera voulez vous?" );
+            Commande:
+                System.Console.WriteLine("\nCombien de Gerberas voulez vous ?\n");
+                System.Console.ForegroundColor = ConsoleColor.Blue;
                 int gerbera = Convert.ToInt32(Console.ReadLine());
-                System.Console.WriteLine("combien de ginger voulez vous?" );
+                System.Console.ForegroundColor = ConsoleColor.White;
+                System.Console.WriteLine("\nCombien de Gingers voulez vous ?\n" );
+                System.Console.ForegroundColor = ConsoleColor.Blue;
                 int ginger = Convert.ToInt32(Console.ReadLine());
+                System.Console.ForegroundColor = ConsoleColor.White;
                 int glaieul=0;
                 if(!Array.Exists(mois, x=>x==dateCreation.Month)){
-                    System.Console.WriteLine("Vous ne pouvez pas commander de glaieul, car ce n'est pas la saison");
+                    System.Console.ForegroundColor = ConsoleColor.White;
+                    System.Console.WriteLine("\nVous ne pouvez pas commander de Glaieuls, car ce n'est pas la saison\n");
                      glaieul = 0;
                 }
                 else{
-                    System.Console.WriteLine("combien de glaieul voulez vous?" );
-                     glaieul =Convert.ToInt32(Console.ReadLine());
+                    System.Console.ForegroundColor = ConsoleColor.White;
+                    System.Console.WriteLine("\nCombien de Glaieuls voulez vous?\n" );
+                    System.Console.ForegroundColor = ConsoleColor.Blue;
+                    glaieul =Convert.ToInt32(Console.ReadLine());
+                    System.Console.ForegroundColor = ConsoleColor.White;
                 }
                 
-                System.Console.WriteLine("combien de margerite voulez vous?" );
+                System.Console.WriteLine("\nCombien de Margerites voulez vous?\n" );
+                System.Console.ForegroundColor = ConsoleColor.Blue;
                 int margerite = Convert.ToInt32(Console.ReadLine());
-                System.Console.WriteLine("combien de rose voulez vous?" );
+                System.Console.ForegroundColor = ConsoleColor.White;
+                System.Console.WriteLine("\nCombien de Roses voulez vous?\n" );
+                System.Console.ForegroundColor = ConsoleColor.Blue;
                 int rose = Convert.ToInt32(Console.ReadLine());
+                System.Console.ForegroundColor = ConsoleColor.White;
                 bool stockCorrect=true;
 
                 if(stockfleur[0]-gerbera<0||stockfleur[1]-ginger<0||stockfleur[2]-glaieul<0||stockfleur[3]-margerite<0||stockfleur[4]-rose<0){
-                    System.Console.WriteLine("nous n'avons pas les stocks, veuillez prendre moins de fleur");
+                    System.Console.WriteLine("Nous n'avons pas les stocks, veuillez prendre moins de fleurs");
                     goto Commande;
                 }
                 float prix =(float)(gerbera*5+ginger*4+glaieul*1+margerite*2.25+rose*2.5);
-                System.Console.WriteLine("Super! Votre total s'élève à "+prix);
+                System.Console.WriteLine("Super! Votre total s'élève à " + prix);
 
                 this.standard = false;
 
                 MySqlConnection connectionperso = new MySqlConnection(connectionString);
-                string personalise = "gerbera : " +gerbera+ "|ginger : "+ginger+" glaieul : "+glaieul+ " margerite :"+margerite+ " Rose rouge : "+rose ;
+                string personalise = "gerbera : " +gerbera+ "ginger : "+ginger+" glaieul : "+glaieul+ " margerite :"+margerite+ " Rose rouge : "+rose ;
                 this.EtatCommande="CC";
                 connectionperso.Open();
                 MySqlCommand cmd3 = connectionperso.CreateCommand();
@@ -200,11 +215,13 @@ namespace TESTCONSOLE
                
         }
         else{
-            
+                System.Console.ForegroundColor = ConsoleColor.White;
                 MySqlConnection connectionperso = new MySqlConnection(connectionString);
                 this.standard = false;
-                System.Console.WriteLine("Décriver le bouquet que vous voulez");
+                System.Console.WriteLine("Décriver le bouquet que vous voulez :\n");
+                System.Console.ForegroundColor = ConsoleColor.Blue;
                 string personalise = Console.ReadLine();
+                System.Console.ForegroundColor = ConsoleColor.White;
                 this.EtatCommande="CPAV";
                 connectionperso.Open();
                 MySqlCommand cmd3 = connectionperso.CreateCommand();

@@ -179,17 +179,41 @@ namespace TESTCONSOLE
             Console.WriteLine("---- Page Client ----");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Vous êtes connecté en tant que " + c.prenom + " " + c.nom);
-            Console.WriteLine("[1] Passer commande\n[2] Se déconnecter\n\nEntrez le numéro de votre choix:\n");
+            Console.WriteLine("[1] Passer commande\n[2] Passer une commande personnalisée\n[3] Se déconnecter\n\nEntrez le numéro de votre choix:\n");
             Console.ForegroundColor = ConsoleColor.Blue;
             string choix = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("");
             switch (choix)
             {
                 case "1":
                     Commande cm = new Commande(c);
                     cm.CommandeStandard();
+                    cm.AjoutBouquetMois();
+                    Console.ReadKey();
+                    PageClient(c);
                     break;
                 case "2":
+
+                DebutCmPerso:
+                    Console.WriteLine("Depuis quel magasin voulez-vous commander ?\nLes magasins disponibles sont :\nParis\nMarseille\nLyon\nLille\nAnnecy\n");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    string magasin = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("");
+                    if (magasin != "Paris" && magasin != "Lyon" && magasin != "Lille" && magasin != "Marseille" && magasin != "Annecy")
+                    {
+                        goto DebutCmPerso;
+                    }
+                   
+                    Commande cmd = new Commande(c);
+                    cmd.CommandePersonalisee(magasin);
+                    cmd.AjoutBouquetMois();
+                    Console.WriteLine("Appuyez sur une touche pour continuer ...");
+                    Console.ReadKey();
+                    PageClient(c);
+                    break;
+                case "3":
                     MainMenu();
                     break;
                 default:
