@@ -194,6 +194,8 @@ namespace TESTCONSOLE
                 MySqlCommand cmd3 = connectionperso.CreateCommand();
                 cmd3.CommandText="INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`Personalisé`)VALUES('"+this.addresse_livraison+"','"+this.message_accompagnant+"','"+this.dateLivraison.ToString("yyyy'-'MM'-'dd")+"','"+this.CodeC+"','"+this.EtatCommande+"',"+this.standard+",'"+personalise+"');";;
                 cmd3.ExecuteNonQuery();
+                cmd3.CommandText="UPDATE stock SET gerbera = gerbera -"+gerbera+", ginger = ginger-"+ginger+", glaieul = glaieul-"+glaieul+",marguerite=marguerite-"+margerite+",Rose_rouge=Rose_rouge-"+rose+" where IdMagasin ='"+magasin+"';";
+                cmd3.ExecuteNonQuery();
                 connectionperso.Close();
                
         }
