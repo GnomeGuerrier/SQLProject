@@ -122,6 +122,34 @@ namespace TESTCONSOLE
 
         }
 
+        
+        public void ChangementEtatCommande(string courriel, string etat, DateTime dl){
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlCommand cmd = connection.CreateCommand();
+            connection.Open();
+            cmd.CommandText="UPDATE boncommande SET EtatCommande = '"+etat+"' where CodeC = '"+courriel+"' and DateLivraison ='"+dl.ToString("yyyy'-'MM'-'dd")+"';"; 
+            cmd.ExecuteNonQuery();
+            connection.Close();
+        }
+
+        public void AffCommande(string courriel){
+             MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlCommand cmd = connection.CreateCommand();
+            connection.Open();
+            cmd.CommandText="SELECT * from boncommande where codeC = '"+courriel+"';";
+            cmd.ExecuteNonQuery();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            string[] valueString = new string[reader.FieldCount];
+
+            while(reader.Read()){
+                    for(int i=0;i<reader.FieldCount;i++){                                   
+                        System.Console.Write(reader.GetValue(i).ToString());
+                    }
+                    System.Console.WriteLine();
+            }
+            connection.Close();
+        }
 
         public void Stats(){
 
@@ -138,6 +166,7 @@ namespace TESTCONSOLE
                     for(int i=0;i<reader.FieldCount;i++){                                   
                         System.Console.Write(reader.GetValue(i).ToString());
                     }
+                    System.Console.WriteLine();
             }
             connection.Close();
 
@@ -149,15 +178,48 @@ namespace TESTCONSOLE
             reader = cmd.ExecuteReader();
             valueString = new string[reader.FieldCount];
            
-           System.Console.WriteLine("----------------");
+           System.Console.WriteLine("----------------");  
             while(reader.Read()){
                     for(int i=0;i<reader.FieldCount;i++){                                   
                         System.Console.Write(reader.GetValue(i).ToString());  //Quel est le bouquet standard qui a eu le plus de succès ? 
 
                     }
+                    System.Console.WriteLine();
             }
             connection.Close();
         
+
+
+         connection.Open();
+            cmd.CommandText="SELECT AVG(prix) AS AveragePrice FROM BonCommande JOIN commande_standard ON BonCommande.NomStandard = commande_standard.nom WHERE CommandeStandard = TRUE;";
+            cmd.ExecuteNonQuery();
+            reader = cmd.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+           
+           System.Console.WriteLine("----------------");  
+            while(reader.Read()){
+                    for(int i=0;i<reader.FieldCount;i++){                                   
+                        System.Console.Write(reader.GetValue(i).ToString());  //Prix moyen bouquet standard 
+
+                    }
+                    System.Console.WriteLine();
+            }
+            connection.Close();
+
+
+            connection.Open();
+            cmd.CommandText="SELECT * FROM magasin where CA=(select max(CA) from magasin) ;"; //Meilleur magasin
+            cmd.ExecuteNonQuery();
+            reader = cmd.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+
+            while(reader.Read()){
+                    for(int i=0;i<reader.FieldCount;i++){                                   
+                        System.Console.Write(reader.GetValue(i).ToString());
+                    }
+                    System.Console.WriteLine();
+            }
+            connection.Close();
         }
     }
 

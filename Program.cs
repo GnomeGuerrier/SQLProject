@@ -188,14 +188,7 @@ namespace TESTCONSOLE
             {
                 case "1":
                     Commande cm = new Commande(c);
-                    cm.CommandeStandard();
-                    cm.AjoutBouquetMois();
-                    Console.ReadKey();
-                    PageClient(c);
-                    break;
-                case "2":
-
-                DebutCmPerso:
+                    DebutCmPerso:
                     Console.WriteLine("Depuis quel magasin voulez-vous commander ?\nLes magasins disponibles sont :\nParis\nMarseille\nLyon\nLille\nAnnecy\n");
                     Console.ForegroundColor = ConsoleColor.Blue;
                     string magasin = Console.ReadLine();
@@ -205,9 +198,26 @@ namespace TESTCONSOLE
                     {
                         goto DebutCmPerso;
                     }
+                    cm.CommandeStandard(magasin);
+                    cm.AjoutBouquetMois();
+                    Console.ReadKey();
+                    PageClient(c);
+                    break;
+                case "2":
+
+                DebutCmPerso1:
+                    Console.WriteLine("Depuis quel magasin voulez-vous commander ?\nLes magasins disponibles sont :\nParis\nMarseille\nLyon\nLille\nAnnecy\n");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    string magasinperso = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("");
+                    if (magasinperso != "Paris" && magasinperso != "Lyon" && magasinperso != "Lille" && magasinperso != "Marseille" && magasinperso != "Annecy")
+                    {
+                        goto DebutCmPerso1;
+                    }
                    
                     Commande cmd = new Commande(c);
-                    cmd.CommandePersonalisee(magasin);
+                    cmd.CommandePersonalisee(magasinperso);
                     cmd.AjoutBouquetMois();
                     Console.WriteLine("Appuyez sur une touche pour continuer ...");
                     Console.ReadKey();
