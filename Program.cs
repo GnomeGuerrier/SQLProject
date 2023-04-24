@@ -317,7 +317,7 @@ namespace TESTCONSOLE
             switch (choix)
             {
                 case "1":
-                    InterfaceAdmin(A);
+                    A.Stats();
                     break;
                 case "2":
                     InterfaceAdmin(A);

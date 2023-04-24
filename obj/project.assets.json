@@ -1706,19 +1706,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hbonn\\.nuget\\packages\\": {}
+    "C:\\Users\\eliot\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hbonn\\Source\\Repos\\GnomeGuerrier\\SQLProject\\TESTCONSOLE.csproj",
+      "projectUniqueName": "C:\\Users\\eliot\\OneDrive\\Documents\\Cours ESILV\\A2\\S4\\Données\\TESTCONSOLE\\TESTCONSOLE.csproj",
       "projectName": "TESTCONSOLE",
-      "projectPath": "C:\\Users\\hbonn\\Source\\Repos\\GnomeGuerrier\\SQLProject\\TESTCONSOLE.csproj",
-      "packagesPath": "C:\\Users\\hbonn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hbonn\\Source\\Repos\\GnomeGuerrier\\SQLProject\\obj\\",
+      "projectPath": "C:\\Users\\eliot\\OneDrive\\Documents\\Cours ESILV\\A2\\S4\\Données\\TESTCONSOLE\\TESTCONSOLE.csproj",
+      "packagesPath": "C:\\Users\\eliot\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\eliot\\OneDrive\\Documents\\Cours ESILV\\A2\\S4\\Données\\TESTCONSOLE\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\hbonn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\eliot\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1726,6 +1731,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

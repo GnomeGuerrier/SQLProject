@@ -150,4 +150,9 @@ INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerit
 INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Lille',140,170,210,130,100);
 
 SELECT * FROM stock where IdMagasin='paris';
-
+SELECT *
+FROM clients
+WHERE nbBouquetMois = (
+    SELECT MAX(nbBouquetMois)
+    FROM clients
+);
