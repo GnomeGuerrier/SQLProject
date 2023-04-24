@@ -8,4 +8,8 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TESTCONSOLE
+<<<<<<< HEAD
 build_property.ProjectDir = c:\Users\eliot\OneDrive\Documents\Cours ESILV\A2\S4\Données\TESTCONSOLE\
+=======
+build_property.ProjectDir = C:\Users\hbonn\Source\Repos\GnomeGuerrier\SQLProject\
+>>>>>>> 2feddeeeb1d6d793f518fd283cfbbc9501926c54
