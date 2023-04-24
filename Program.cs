@@ -9,21 +9,11 @@ namespace TESTCONSOLE
         static void Main(string[] args){
             string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
 
-
-            //Clients c = new Clients();
-            //Commande commande = new Commande(c);
-            //commande.CommandeStandard();
-
-            clients test = new clients("1","1");
-            Commande ctest = new Commande(test);
-            ctest.CommandePersonalise("Paris");
-
-            /*
             WelcomePage();
             Console.ReadKey();
             MainMenu();
 
-*/
+
 
             Console.ReadKey();
         }

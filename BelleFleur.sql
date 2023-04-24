@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS commande_standard(
 
 DROP TABLE IF EXISTS administrateurs;
 CREATE TABLE IF NOT EXISTS administrateurs(
+    IdAdmin INTEGER,
     pseudo VARCHAR(20),
     mot_de_passe VARCHAR(20),
     PRIMARY KEY(IdAdmin)
