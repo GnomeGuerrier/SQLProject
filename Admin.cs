@@ -149,7 +149,7 @@ namespace TESTCONSOLE
             reader = cmd.ExecuteReader();
             valueString = new string[reader.FieldCount];
            
-           System.Console.WriteLine("----------------");
+           System.Console.WriteLine("----------------");  
             while(reader.Read()){
                     for(int i=0;i<reader.FieldCount;i++){                                   
                         System.Console.Write(reader.GetValue(i).ToString());  //Quel est le bouquet standard qui a eu le plus de succès ? 
