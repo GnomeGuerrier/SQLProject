@@ -122,6 +122,25 @@ namespace TESTCONSOLE
 
         }
 
+        
+        public void ChangementEtatCommande(string courriel, string etat, DateTime dl){
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlCommand cmd = connection.CreateCommand();
+            connection.Open();
+            cmd.CommandText="UPDATE boncommande SET EtatCommande = '"+etat+"' where CodeC = '"+courriel+"' and DateLivraison ='"+dl.ToString("yyyy'-'MM'-'dd")+"';"; 
+            cmd.ExecuteNonQuery();
+            connection.Close();
+        }
+
+        public void AffCommande(string courriel){
+             MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlCommand cmd = connection.CreateCommand();
+            connection.Open();
+            cmd.CommandText="SELECT * from boncommande where codeC = '"+courriel+"';";
+            cmd.ExecuteNonQuery();
+            connection.Close();
+        }
 
         public void Stats(){
 
