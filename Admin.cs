@@ -139,6 +139,15 @@ namespace TESTCONSOLE
             connection.Open();
             cmd.CommandText="SELECT * from boncommande where codeC = '"+courriel+"';";
             cmd.ExecuteNonQuery();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            string[] valueString = new string[reader.FieldCount];
+
+            while(reader.Read()){
+                    for(int i=0;i<reader.FieldCount;i++){                                   
+                        System.Console.Write(reader.GetValue(i).ToString());
+                    }
+                    System.Console.WriteLine();
+            }
             connection.Close();
         }
 
@@ -157,6 +166,7 @@ namespace TESTCONSOLE
                     for(int i=0;i<reader.FieldCount;i++){                                   
                         System.Console.Write(reader.GetValue(i).ToString());
                     }
+                    System.Console.WriteLine();
             }
             connection.Close();
 
@@ -174,9 +184,42 @@ namespace TESTCONSOLE
                         System.Console.Write(reader.GetValue(i).ToString());  //Quel est le bouquet standard qui a eu le plus de succès ? 
 
                     }
+                    System.Console.WriteLine();
             }
             connection.Close();
         
+
+
+         connection.Open();
+            cmd.CommandText="SELECT AVG(prix) AS AveragePrice FROM BonCommande JOIN commande_standard ON BonCommande.NomStandard = commande_standard.nom WHERE CommandeStandard = TRUE;";
+            cmd.ExecuteNonQuery();
+            reader = cmd.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+           
+           System.Console.WriteLine("----------------");  
+            while(reader.Read()){
+                    for(int i=0;i<reader.FieldCount;i++){                                   
+                        System.Console.Write(reader.GetValue(i).ToString());  //Prix moyen bouquet standard 
+
+                    }
+                    System.Console.WriteLine();
+            }
+            connection.Close();
+
+
+            connection.Open();
+            cmd.CommandText="SELECT * FROM magasin where CA=(select max(CA) from magasin) ;"; //Meilleur magasin
+            cmd.ExecuteNonQuery();
+            reader = cmd.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+
+            while(reader.Read()){
+                    for(int i=0;i<reader.FieldCount;i++){                                   
+                        System.Console.Write(reader.GetValue(i).ToString());
+                    }
+                    System.Console.WriteLine();
+            }
+            connection.Close();
         }
     }
 

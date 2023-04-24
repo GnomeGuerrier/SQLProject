@@ -49,7 +49,7 @@ namespace TESTCONSOLE
             }
 
         }
-        public void CommandeStandard(){
+        public void CommandeStandard(string magasin){
                  this.standard = true;
                 MySqlConnection connection = new MySqlConnection(connectionString);
 
@@ -104,6 +104,8 @@ namespace TESTCONSOLE
                        connection.Open();
                         MySqlCommand cmd1 = connection.CreateCommand();
                         cmd1.CommandText=command;
+                        cmd1.ExecuteNonQuery();
+                        cmd1.CommandText = "UPDATE magasin SET CA = CA +"+prix+" where nom = '"+magasin+"';";
                         cmd1.ExecuteNonQuery();
                         connection.Close();
                         System.Console.ForegroundColor = ConsoleColor.White;
@@ -216,8 +218,9 @@ namespace TESTCONSOLE
                 connectionperso.Open();
                 MySqlCommand cmd3 = connectionperso.CreateCommand();
                 cmd3.CommandText="INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`Personalisé`,`Prix`)VALUES('"+this.addresse_livraison+"','"+this.message_accompagnant+"','"+this.dateLivraison.ToString("yyyy'-'MM'-'dd")+"','"+this.CodeC+"','"+this.EtatCommande+"',"+this.standard+",'"+personalise+"',"+prix+");";;
-                
-                
+                cmd3.ExecuteNonQuery();
+                cmd3.CommandText = "UPDATE magasin SET CA = CA +"+prix+" where nom = '"+magasin+"';";
+                cmd3.ExecuteNonQuery();
                 cmd3.CommandText="UPDATE stock SET gerbera = gerbera -"+gerbera+", ginger = ginger-"+ginger+", glaieul = glaieul-"+glaieul+",marguerite=marguerite-"+margerite+",Rose_rouge=Rose_rouge-"+rose+" where IdMagasin ='"+magasin+"';";
                 cmd3.ExecuteNonQuery();
                 connectionperso.Close();
@@ -241,6 +244,8 @@ namespace TESTCONSOLE
                 connectionperso.Open();
                 MySqlCommand cmd3 = connectionperso.CreateCommand();
                 cmd3.CommandText="INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`Personalisé`,`prix`)VALUES('"+this.addresse_livraison+"','"+this.message_accompagnant+"','"+this.dateLivraison.ToString("yyyy'-'MM'-'dd")+"','"+this.CodeC+"','"+this.EtatCommande+"',"+this.standard+",'"+personalise+"',"+prix+"');";
+                cmd3.ExecuteNonQuery();
+                cmd3.CommandText = "UPDATE magasin SET CA = CA +"+prix+" where nom = '"+magasin+"';";
                 cmd3.ExecuteNonQuery();
                 connectionperso.Close();
 
