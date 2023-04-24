@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS BonCommande(
     CommandeStandard BOOLEAN,
     NomStandard VARCHAR(100),
     Personalisé VARCHAR(500), 
+    prix DECIMAL(5,2),
     PRIMARY KEY(codeC,dateCreation),
     FOREIGN KEY(CodeC) REFERENCES Clients(courriel)
 );
