@@ -230,6 +230,12 @@ namespace TESTCONSOLE
                 System.Console.ForegroundColor = ConsoleColor.Blue;
                 string personalise = Console.ReadLine();
                 System.Console.ForegroundColor = ConsoleColor.White;
+                
+                System.Console.WriteLine("Donner le prix que vous voulez payer :\n");
+                System.Console.ForegroundColor = ConsoleColor.Blue;
+                float prix = float.Parse(Console.ReadLine());
+                System.Console.ForegroundColor = ConsoleColor.White;
+
                 this.EtatCommande="CPAV";
                 connectionperso.Open();
                 MySqlCommand cmd3 = connectionperso.CreateCommand();
