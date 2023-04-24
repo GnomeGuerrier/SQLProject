@@ -188,7 +188,7 @@ namespace TESTCONSOLE
             {
                 case "1":
                     Commande cm = new Commande(c);
-                    DebutCmPerso:
+                    DebutCmSt:
                     Console.WriteLine("Depuis quel magasin voulez-vous commander ?\nLes magasins disponibles sont :\nParis\nMarseille\nLyon\nLille\nAnnecy\n");
                     Console.ForegroundColor = ConsoleColor.Blue;
                     string magasin = Console.ReadLine();
@@ -196,7 +196,7 @@ namespace TESTCONSOLE
                     Console.WriteLine("");
                     if (magasin != "Paris" && magasin != "Lyon" && magasin != "Lille" && magasin != "Marseille" && magasin != "Annecy")
                     {
-                        goto DebutCmPerso;
+                        goto DebutCmSt;
                     }
                     cm.CommandeStandard(magasin);
                     cm.AjoutBouquetMois();
