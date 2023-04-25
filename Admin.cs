@@ -73,7 +73,9 @@ namespace TESTCONSOLE
 
         #endregion
 
-        
+        /// <summary>
+        /// Permet la création d'un nouvel admin
+        /// </summary>
         public void NouvelAdmin()
         {
             // Récup automatique de l'IdAdmin
@@ -122,7 +124,12 @@ namespace TESTCONSOLE
 
         }
 
-        
+        /// <summary>
+        /// Permet le changement de l'état d'une commande
+        /// </summary>
+        /// <param name="courriel"> le courriel de la commande</param>
+        /// <param name="etat">le novel état</param>
+        /// <param name="dl">la date e livraison de la commande</param>
         public void ChangementEtatCommande(string courriel, string etat, DateTime dl){
 
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -132,7 +139,10 @@ namespace TESTCONSOLE
             cmd.ExecuteNonQuery();
             connection.Close();
         }
-
+        /// <summary>
+        /// Permet d'afficher toutes les commandes d'un utilisateur
+        /// </summary>
+        /// <param name="courriel">le courriel de l'utilisateur à afficher</param>
         public void AffCommande(string courriel){
              MySqlConnection connection = new MySqlConnection(connectionString);
             MySqlCommand cmd = connection.CreateCommand();
@@ -151,7 +161,11 @@ namespace TESTCONSOLE
             }
             connection.Close();
         }
-
+        /// <summary>
+        /// Permet de regarder si les stockes sont basses sur un magasin
+        /// </summary>
+        /// <param name="stockInfo"></param>
+        /// <param name="magasin"></param>
         public void stock(int[] stockInfo, string magasin){
 
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -197,7 +211,9 @@ namespace TESTCONSOLE
             if(!deficit)System.Console.WriteLine("Vos stocks ne sont pas en dessous de l'alerte");
             connection.Close();
         }
-
+        /// <summary>
+        /// Permet d'afficher toutes les stats intéressantes que l'admin pourrait voiloir
+        /// </summary>
         public void Stats(){
 
 
