@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS BonCommande(
     NomStandard VARCHAR(100),
     Personalisé VARCHAR(500), 
     prix DECIMAL(5,2),
+    magasin VARCHAR(40),
     PRIMARY KEY(codeC,dateCreation),
     FOREIGN KEY(CodeC) REFERENCES Clients(courriel)
 );
@@ -139,8 +140,8 @@ INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerit
 
 SELECT * FROM Clients where courriel = '155555555555555555' and mdp= '1';
 
-SELECT * FROM commande_standard
-#CALL ajout_clients('test', 'test', 10, 'test@test.com', 'mdp', '34 rue', 101010);
+SELECT * FROM commande_standard;
+CALL ajout_clients('test', 'test', 10, 'test@test.com', 'mdp', '34 rue', 101010);
 
 INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`)VALUES('ff','rr', '2004-01-01','1','ee',true,'GrosMerci');
 
@@ -161,3 +162,16 @@ WHERE nbBouquetMois = (
     FROM clients
 );
 Update stock SET gerbera = 10 where `IdMagasin` = 'Paris';
+SELECT SUM(Price) AS TotalCA
+FROM (
+    SELECT BonCommande.Prix AS Price
+    FROM BonCommande
+    JOIN commande_standard ON BonCommande.NomStandard = commande_standard.nom
+    WHERE CommandeStandard = TRUE
+    UNION ALL
+    SELECT BonCommande.prix AS Price
+    FROM BonCommande
+    WHERE CommandeStandard = FALSE
+) AS AllBouquets;
+
+
