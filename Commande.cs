@@ -77,7 +77,8 @@ namespace TESTCONSOLE
                     for(int i=0;i<reader.FieldCount;i++){                                   //Nom bouquets
                         System.Console.Write(reader.GetValue(i).ToString());
                         System.Console.ForegroundColor = ConsoleColor.Red;
-                        System.Console.WriteLine(" || ");
+                        System.Console.Write(" || ");
+                        System.Console.WriteLine();
                         System.Console.ForegroundColor = ConsoleColor.White;
                         
                         
@@ -87,7 +88,6 @@ namespace TESTCONSOLE
                 connection.Close();
                 System.Console.Write("Quelle commande voulez vous ?");
                 System.Console.ForegroundColor = ConsoleColor.Red;
-                System.Console.WriteLine(" \t /!/ CASE SENSITIVE");
                 System.Console.WriteLine(" \t /!/ CASE SENSITIVE");
                 System.Console.ForegroundColor = ConsoleColor.White;
                 string choix = "";
