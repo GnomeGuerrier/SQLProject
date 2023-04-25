@@ -160,3 +160,4 @@ WHERE nbBouquetMois = (
     SELECT MAX(nbBouquetMois)
     FROM clients
 );
+Update stock SET gerbera = 10 where `IdMagasin` = 'Paris';

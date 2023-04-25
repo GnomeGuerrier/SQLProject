@@ -320,7 +320,7 @@ namespace TESTCONSOLE
             Console.WriteLine("---- Interface Admin ----\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Vous êtes connecté en tant que " + A.pseudo + " | ID = " + A.idAdmin);
-            Console.WriteLine("[1] Accéder aux statistiques\n[2] Changer l'état d'une commande\n[3] Se déconnecter\n\nEntrez le numéro de votre choix:\n");
+            Console.WriteLine("[1] Accéder aux statistiques\n[2] Changer l'état d'une commande\n[3] Vérifier l'états de vos stocks\n[4] Se déconnecter\n\nEntrez le numéro de votre choix:\n");
             Console.ForegroundColor = ConsoleColor.Blue;
             string choix = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
@@ -332,8 +332,23 @@ namespace TESTCONSOLE
                 case "2":
                     InterfaceAdmin(A);
                     break;
+                case "4":
+                    InterfaceAdmin(A);
+                    break;
                 case "3":
-                    MainMenu();
+                int[] stock = {20,20,20,20,20};
+                DebutCmPerso2:
+                Console.WriteLine("Depuis quel magasin voulez-vous commander ?\nLes magasins disponibles sont :\nParis\nMarseille\nLyon\nLille\nAnnecy\n");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    string magasinperso = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("");
+                    if (magasinperso != "Paris" && magasinperso != "Lyon" && magasinperso != "Lille" && magasinperso != "Marseille" && magasinperso != "Annecy")
+                    {
+                        goto DebutCmPerso2;
+                    }
+                A.stock(stock,magasinperso);
+                   
                     break;
                 default:
                     InterfaceAdmin(A);
