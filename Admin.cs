@@ -157,6 +157,7 @@ namespace TESTCONSOLE
             MySqlConnection connection = new MySqlConnection(connectionString);
             MySqlCommand cmd = connection.CreateCommand();
             connection.Open();
+            Console.WriteLine("Informations du meilleur client : \n");
             cmd.CommandText="SELECT * FROM clients where nbBouquetMois=(select max(nbBouquetMois) from clients) ;"; //Meilleur client
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -165,6 +166,7 @@ namespace TESTCONSOLE
             while(reader.Read()){
                     for(int i=0;i<reader.FieldCount;i++){                                   
                         System.Console.Write(reader.GetValue(i).ToString());
+                        System.Console.Write(" | ");
                     }
                     System.Console.WriteLine();
             }
@@ -178,11 +180,12 @@ namespace TESTCONSOLE
             reader = cmd.ExecuteReader();
             valueString = new string[reader.FieldCount];
            
-           System.Console.WriteLine("----------------");  
-            while(reader.Read()){
+           System.Console.WriteLine("----------------");
+            Console.WriteLine("Bouquet standard avec le plus de succès :\n");
+            while (reader.Read()){
                     for(int i=0;i<reader.FieldCount;i++){                                   
                         System.Console.Write(reader.GetValue(i).ToString());  //Quel est le bouquet standard qui a eu le plus de succès ? 
-
+                    System.Console.Write(" | ");
                     }
                     System.Console.WriteLine();
             }
@@ -191,16 +194,17 @@ namespace TESTCONSOLE
 
 
          connection.Open();
-            cmd.CommandText="SELECT AVG(prix) AS AveragePrice FROM BonCommande JOIN commande_standard ON BonCommande.NomStandard = commande_standard.nom WHERE CommandeStandard = TRUE;";
+            cmd.CommandText = "SELECT AVG(boncommande.prix) AS AveragePrice FROM BonCommande JOIN commande_standard ON BonCommande.NomStandard = commande_standard.nom WHERE CommandeStandard = TRUE;";
             cmd.ExecuteNonQuery();
             reader = cmd.ExecuteReader();
             valueString = new string[reader.FieldCount];
            
-           System.Console.WriteLine("----------------");  
+           System.Console.WriteLine("----------------");
+            System.Console.WriteLine("Prix moyen bouquet standard :\n");
             while(reader.Read()){
                     for(int i=0;i<reader.FieldCount;i++){                                   
                         System.Console.Write(reader.GetValue(i).ToString());  //Prix moyen bouquet standard 
-
+                        System.Console.Write(" | ");
                     }
                     System.Console.WriteLine();
             }
@@ -213,9 +217,12 @@ namespace TESTCONSOLE
             reader = cmd.ExecuteReader();
             valueString = new string[reader.FieldCount];
 
+            System.Console.WriteLine("----------------");
+            System.Console.WriteLine("Meilleur magasin :\n");
             while(reader.Read()){
                     for(int i=0;i<reader.FieldCount;i++){                                   
                         System.Console.Write(reader.GetValue(i).ToString());
+                        System.Console.Write(" | ");
                     }
                     System.Console.WriteLine();
             }
