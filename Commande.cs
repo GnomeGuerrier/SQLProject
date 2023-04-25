@@ -106,8 +106,29 @@ namespace TESTCONSOLE
                     else if (choix=="Maman")prix=80;
                     else if (choix=="Vive la mariée")prix=109;
                     else prix = -1;
+                AccessoiresStd:
+                Console.WriteLine("\nVoulez vous commander des accessoires ? [Y/N]\n");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                choix = Console.ReadLine();
+                Console.ForegroundColor= ConsoleColor.White;
+                Console.WriteLine();
+                string perso = "";
+                if(choix == "Y")
+                {
+                    string[] acessoires = Accessoire(magasin);
+                    prix += Convert.ToInt32(float.Parse(acessoires[1]));
+                    perso = acessoires[0];
+                    
+                }else if(choix == "N")
+                {
 
-                    string command = "INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`,`prix`,`magasin`)VALUES('"+this.addresse_livraison+"','"+this.message_accompagnant+"','"+this.dateLivraison.ToString("yyyy'-'MM'-'dd")+"','"+this.CodeC+"','"+this.EtatCommande+"',"+this.standard+",'"+choix+"',"+prix+",'"+magasin+"');";
+                }
+                else
+                {
+                    goto AccessoiresStd;
+                }
+
+                    string command = "INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`,`prix`,`magasin`,`personalisé`)VALUES('"+this.addresse_livraison+"','"+this.message_accompagnant+"','"+this.dateLivraison.ToString("yyyy'-'MM'-'dd")+"','"+this.CodeC+"','"+this.EtatCommande+"',"+this.standard+",'"+choix+"',"+prix+",'"+magasin+"','"+perso+"');";
                         
                        connection.Open();
                         MySqlCommand cmd1 = connection.CreateCommand();
@@ -127,10 +148,13 @@ namespace TESTCONSOLE
         }
 
         public string[] Accessoire(string magasin){
-            System.Console.WriteLine("Bonjour quels accessoires voulez vous acheter? \nVase[5€] Boite pour fleurs[10€] Boite de chocolat[10€] \n Decoration papier maché[13€]");
+            System.Console.WriteLine(\n"Bonjour quels accessoires voulez vous acheter? \nVase[5€]\nBoite pour fleurs[10€]\nBoite de chocolat[10€]\nDecoration papier maché[13€]\n");
             string[] listNom = {"Vase","Boite pour fleur","Boite de chocolat","Decoration papier maché"};
-                Debut:
+        Debut:
+            Console.ForegroundColor = ConsoleColor.Blue;
                 string Accesoire = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
                 if(!Array.Exists(listNom, x =>x==Accesoire)){
                     System.Console.WriteLine("Vous n'avez pas choisi d'accessoire valide");
                     goto Debut;
@@ -242,12 +266,40 @@ namespace TESTCONSOLE
                     goto Commande;
                 }
                 float prix =(float)(gerbera*5+ginger*4+glaieul*1+margerite*2.25+rose*2.5);
+
+
+                AccessoiresPers:
+                Console.WriteLine("Voulez vous commander des accessoires ? [Y/N]\n");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                string choix = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine();
+                string perso = "";
+                if (choix == "Y")
+                {
+                    string[] acessoires = Accessoire(magasin);
+                    prix += float.Parse(acessoires[1]);
+                    perso = acessoires[0];
+
+                }
+                else if (choix == "N")
+                {
+
+                }
+                else
+                {
+                    goto AccessoiresPers;
+                }
+
+                
+
                 System.Console.WriteLine("Super! Votre total s'élève à " + prix);
 
                 this.standard = false;
 
                 MySqlConnection connectionperso = new MySqlConnection(connectionString);
                 string personalise = "gerbera : " +gerbera+ "ginger : "+ginger+" glaieul : "+glaieul+ " margerite :"+margerite+ " Rose rouge : "+rose ;
+                personalise = personalise + " | " + perso;
                 this.EtatCommande="CC";
                 connectionperso.Open();
                 MySqlCommand cmd3 = connectionperso.CreateCommand();
