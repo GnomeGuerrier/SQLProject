@@ -216,15 +216,58 @@ namespace TESTCONSOLE
         /// </summary>
         public void Stats(){
 
+            MySqlConnection connection = new MySqlConnection(connectionString);         // Définition connexion
+            MySqlCommand cmd = connection.CreateCommand();                              // Définition de la commande
+            connection.Open();                                                          // Ouverture connexion
+            Console.WriteLine("Nombre de ventes : \n");                                 // Interface, pour faire joli
+            cmd.CommandText = "SELECT COUNT(*) AS TotalBonCommande FROM BonCommande;";  // Set de la commande
+            cmd.ExecuteNonQuery();                                                      // Execution commande
+            MySqlDataReader reader = cmd.ExecuteReader();                               // Lecture résultat
+            string[] valueString = new string[reader.FieldCount];                       // Mise des résultats dans un tableau d'une ligne
 
-            MySqlConnection connection = new MySqlConnection(connectionString);
-            MySqlCommand cmd = connection.CreateCommand();
+            while (reader.Read())                                                       // Tant qu'on lit ...
+            {       
+                for (int i = 0; i < reader.FieldCount; i++)                                 // Pour chaque case du tableau
+                {
+                    System.Console.Write(reader.GetValue(i).ToString());                    // On écrit
+                    System.Console.Write(" | ");                                            // On sépare par un |
+                }
+                System.Console.WriteLine();                                             // Retour à la ligne
+            }
+            connection.Close();                                                         // Fermeture connexion
+
+
+            connection = new MySqlConnection(connectionString);
+            cmd = connection.CreateCommand();
             connection.Open();
+            System.Console.WriteLine("----------------");
+            Console.WriteLine("CA total : \n");
+            cmd.CommandText = "SELECT SUM(Price) AS TotalCA FROM (SELECT BonCommande.Prix AS Price FROM BonCommande JOIN commande_standard ON BonCommande.NomStandard = commande_standard.nom WHERE CommandeStandard = TRUE UNION ALL SELECT BonCommande.prix AS Price FROM BonCommande WHERE CommandeStandard = FALSE) AS AllBouquets;"; //CA TOTAL
+            cmd.ExecuteNonQuery();
+            reader = cmd.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    System.Console.Write(reader.GetValue(i).ToString());
+                    System.Console.Write(" | ");
+                }
+                System.Console.WriteLine();
+            }
+            connection.Close();
+
+
+            connection = new MySqlConnection(connectionString);
+            cmd = connection.CreateCommand();
+            connection.Open();
+            System.Console.WriteLine("----------------");
             Console.WriteLine("Informations du meilleur client : \n");
             cmd.CommandText="SELECT * FROM clients where nbBouquetMois=(select max(nbBouquetMois) from clients) ;"; //Meilleur client
             cmd.ExecuteNonQuery();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            string[] valueString = new string[reader.FieldCount];
+            reader = cmd.ExecuteReader();
+            valueString = new string[reader.FieldCount];
 
             while(reader.Read()){
                     for(int i=0;i<reader.FieldCount;i++){                                   
@@ -288,6 +331,48 @@ namespace TESTCONSOLE
                         System.Console.Write(" | ");
                     }
                     System.Console.WriteLine();
+            }
+            connection.Close();
+
+
+            connection.Open();
+            cmd.CommandText = "SELECT SUM(Gerbera) AS TotalGerbera, SUM(Ginger) AS TotalGinger, SUM(Glaieul) AS TotalGlaieul, SUM(Marguerite) AS TotalMarguerite, SUM(Rose_rouge) AS TotalRoseRouge FROM stock;"; //Fleurs par catégorie
+            cmd.ExecuteNonQuery();
+            reader = cmd.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+
+            System.Console.WriteLine("----------------");
+            System.Console.WriteLine("Nombre fleurs par catégorie :\nGerbera\tGinger\tGlaieul\tMarg.\tRoses_rouges");
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    System.Console.Write(reader.GetValue(i).ToString());
+                    System.Console.Write("\t| ");
+                }
+                System.Console.WriteLine();
+            }
+            connection.Close();
+        }
+
+        public void AffCommandeParMag()
+        {
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlCommand cmd = connection.CreateCommand();
+            connection.Open();
+            cmd.CommandText = "SELECT * FROM BonCommande ORDER BY magasin";
+            cmd.ExecuteNonQuery();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            string[] valueString = new string[reader.FieldCount];
+
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    System.Console.Write(reader.GetValue(i).ToString());
+                    System.Console.Write(" | ");
+                }
+                System.Console.WriteLine();
             }
             connection.Close();
         }

@@ -322,7 +322,7 @@ namespace TESTCONSOLE
             Console.WriteLine("---- Interface Admin ----\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Vous êtes connecté en tant que " + A.pseudo + " | ID = " + A.idAdmin);
-            Console.WriteLine("[1] Accéder aux statistiques\n[2] Liste commandes\n[3] Modifier état commande\n[4] Vérifier l'état de vos stocks\n[5] Se déconnecter\n\nEntrez le numéro de votre choix:\n");
+            Console.WriteLine("[1] Accéder aux statistiques\n[2] Liste commandes\n[3] Modifier état commande\n[4] Vérifier l'état de vos stocks\n[5] Liste commandes par magasin\n[6] Se déconnecter\n\nEntrez le numéro de votre choix:\n");
             Console.ForegroundColor = ConsoleColor.Blue;
             string choix = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
@@ -386,6 +386,12 @@ namespace TESTCONSOLE
                     InterfaceAdmin(A);
                     break;
                 case "5":
+                    A.AffCommandeParMag();
+                    Console.WriteLine("\nAppuyez sur une touche pour continuer ...");
+                    Console.ReadKey();
+                    InterfaceAdmin(A);
+                    break;
+                case "6":
                     MainMenu();
                     break;
                 default:
