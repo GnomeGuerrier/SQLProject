@@ -13,6 +13,10 @@ namespace TESTCONSOLE
         public int carte_credit;
         string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
         public bool exists=false;
+        
+        /// <summary>
+        /// permet la création d'un client
+        /// </summary>
         public Clients(){
             
              #region add client
@@ -72,7 +76,16 @@ namespace TESTCONSOLE
     }
     #endregion
         }
-
+        /// <summary>
+        /// Permet la création d'un nouveau client, à l'inscription
+        /// </summary>
+        /// <param name="nomDonne">son nom</param>
+        /// <param name="prenomDonne">son prénom</param>
+        /// <param name="num_tel"></param>
+        /// <param name="courrielDonne"></param>
+        /// <param name="mdpDonne"></param>
+        /// <param name="addresseDonne"></param>
+        /// <param name="carteDonne"></param>
     public Clients(string nomDonne, string prenomDonne, int num_tel, string courrielDonne, string mdpDonne,string addresseDonne, int carteDonne){
             
              #region add client
@@ -126,7 +139,11 @@ namespace TESTCONSOLE
     }
     #endregion
         }
-
+        /// <summary>
+        /// Ce constructeur permet à un client de se connecter, et cela va créer un nouvel object de class client
+        /// </summary>
+        /// <param name="courrielAtester"> L'email de l'utilisateur</param>
+        /// <param name="mdpAtester"> le mdp de l'utilisateur</param>
         public Clients(string courrielAtester, string mdpAtester){
                 MySqlConnection connection = new MySqlConnection(connectionString);
                 connection.Open();
