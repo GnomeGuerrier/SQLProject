@@ -118,6 +118,14 @@ CREATE TABLE IF NOT EXISTS administrateurs(
     mot_de_passe VARCHAR(20),
     PRIMARY KEY(IdAdmin)
 );
+DROP TABLE IF EXISTS ACCESSOIRES;
+CREATE TABLE IF NOT EXISTS ACCESSOIRES(
+Ville VARCHAR(40),
+CodeC VARCHAR(40),
+Accessoire VARCHAR(400),
+Prix DECIMAL (5,2),
+dateCreation DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
 INSERT INTO `fleur`.`commande_standard` (`nom`,`Compo_Fleur`,`prix`,`categorie`)VALUES ('Gros Merci','Arrangement floral avec marguerites et verdure',45,'toute occasion');
 INSERT INTO `fleur`.`commande_standard` (`nom`,`Compo_Fleur`,`prix`,`categorie`)VALUES('L amoureux','Arrangement floral avec roses blanches et roses rouges',65,'Saint Valentin');
@@ -173,6 +181,8 @@ FROM (
     FROM BonCommande
     WHERE CommandeStandard = FALSE
 ) AS AllBouquets;
+
+
 
 
 CALL ajout_clients('Alice', 'Smith', 12345, 'alice.smith@example.com', 'alice123', '123 Main St', 1111);

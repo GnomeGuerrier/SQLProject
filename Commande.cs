@@ -126,6 +126,24 @@ namespace TESTCONSOLE
             
         }
 
+        public string[] Accessoire(string magasin){
+            System.Console.WriteLine("Bonjour quels accessoires voulez vous acheter? \nVase[5€] Boite pour fleurs[10€] Boite de chocolat[10€] \n Decoration papier maché[13€]");
+            string[] listNom = {"Vase","Boite pour fleur","Boite de chocolat","Decoration papier maché"};
+                Debut:
+                string Accesoire = Console.ReadLine();
+                if(!Array.Exists(listNom, x =>x==Accesoire)){
+                    System.Console.WriteLine("Vous n'avez pas choisi d'accessoire valide");
+                    goto Debut;
+                }
+                string[] aRetourner = new string[2];
+            aRetourner[0] = Accesoire;
+            if(Accesoire =="Vase")aRetourner[1] = "5";
+            else if(Accesoire =="Boite pour fleur")aRetourner[1] = "10";
+            else if(Accesoire =="Boite de chocolat")aRetourner[1] = "10";
+            else if(Accesoire =="Vase")aRetourner[1] = "13";
+            return aRetourner;
+        }
+
 
         /// <summary>
         /// Cette Fonction permet de prendre en compte combien de commande a fait un client par mois
@@ -144,6 +162,9 @@ namespace TESTCONSOLE
 
         }
         
+
+
+
         /// <summary>
         /// Permet la commande d'un commande personalisée, que ce soit par texte ou item
         /// </summary>
