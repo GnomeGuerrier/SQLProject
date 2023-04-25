@@ -151,6 +151,52 @@ namespace TESTCONSOLE
             connection.Close();
         }
 
+        public void stock(int[] stockInfo, string magasin){
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlCommand cmd = connection.CreateCommand();
+            connection.Open();
+            cmd.CommandText="SELECT * FROM stock where IdMagasin = '"+magasin+"';";
+            cmd.ExecuteNonQuery();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            string[] valueString = new string[reader.FieldCount];
+            bool deficit = false;
+            while(reader.Read()){
+                    for(int i = 1;i<reader.FieldCount;i++){
+                        
+                        if(stockInfo[i-1]>=Convert.ToInt32(reader.GetValue(i))){
+                            switch(i-1){
+                                case(0):
+                                deficit =true;
+                                    System.Console.WriteLine("Vos stocks sont bas sur les Gerbera, elles sont à "+Convert.ToInt32(reader.GetValue(i)));
+                                    break;
+                                case(1):
+                                deficit =true;
+                                    System.Console.WriteLine("Vos stocks sont bas sur les Ginger, elles sont à "+Convert.ToInt32(reader.GetValue(i)));
+                                    break;
+                                case(2):
+                                deficit =true;
+                                    System.Console.WriteLine("Vos stocks sont bas sur les Glaieul, elles sont à "+Convert.ToInt32(reader.GetValue(i)));
+                                    break;
+                                case(3):
+                                deficit =true;
+                                    System.Console.WriteLine("Vos stocks sont bas sur les Marguerite, elles sont à "+Convert.ToInt32(reader.GetValue(i)));
+                                    break;
+                                case(4):
+                                deficit =true;
+                                    System.Console.WriteLine("Vos stocks sont bas sur les rose rouges, elles sont à "+Convert.ToInt32(reader.GetValue(i)));
+                                    break;
+                                default:
+                                System.Console.WriteLine("Vos stocks sont bas");
+                                break;
+                            }
+                        }
+                    }
+            }
+            if(!deficit)System.Console.WriteLine("Vos stocks ne sont pas en dessous de l'alerte");
+            connection.Close();
+        }
+
         public void Stats(){
 
 
@@ -191,7 +237,7 @@ namespace TESTCONSOLE
 
 
          connection.Open();
-            cmd.CommandText="SELECT AVG(prix) AS AveragePrice FROM BonCommande JOIN commande_standard ON BonCommande.NomStandard = commande_standard.nom WHERE CommandeStandard = TRUE;";
+            cmd.CommandText="SELECT AVG(boncommande.prix) AS AveragePrice FROM BonCommande JOIN commande_standard ON BonCommande.NomStandard = commande_standard.nom WHERE CommandeStandard = TRUE;";
             cmd.ExecuteNonQuery();
             reader = cmd.ExecuteReader();
             valueString = new string[reader.FieldCount];

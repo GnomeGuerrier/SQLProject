@@ -243,7 +243,7 @@ namespace TESTCONSOLE
                 this.EtatCommande="CPAV";
                 connectionperso.Open();
                 MySqlCommand cmd3 = connectionperso.CreateCommand();
-                cmd3.CommandText="INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`Personalisé`,`prix`)VALUES('"+this.addresse_livraison+"','"+this.message_accompagnant+"','"+this.dateLivraison.ToString("yyyy'-'MM'-'dd")+"','"+this.CodeC+"','"+this.EtatCommande+"',"+this.standard+",'"+personalise+"',"+prix+"');";
+                cmd3.CommandText="INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`Personalisé`,`prix`)VALUES('"+this.addresse_livraison+"','"+this.message_accompagnant+"','"+this.dateLivraison.ToString("yyyy'-'MM'-'dd")+"','"+this.CodeC+"','"+this.EtatCommande+"',"+this.standard+",'"+personalise+"',"+prix+");";
                 cmd3.ExecuteNonQuery();
                 cmd3.CommandText = "UPDATE magasin SET CA = CA +"+prix+" where nom = '"+magasin+"';";
                 cmd3.ExecuteNonQuery();
