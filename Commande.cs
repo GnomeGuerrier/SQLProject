@@ -79,7 +79,6 @@ namespace TESTCONSOLE
                         System.Console.Write(reader.GetValue(i).ToString());
                         System.Console.ForegroundColor = ConsoleColor.Red;
                         System.Console.Write(" || ");
-                        System.Console.WriteLine();
                         System.Console.ForegroundColor = ConsoleColor.White;
                         
                         
