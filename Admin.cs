@@ -128,7 +128,7 @@ namespace TESTCONSOLE
             MySqlConnection connection = new MySqlConnection(connectionString);
             MySqlCommand cmd = connection.CreateCommand();
             connection.Open();
-            cmd.CommandText="UPDATE boncommande SET EtatCommande = '"+etat+"' where CodeC = '"+courriel+"' and DateLivraison ='"+dl.ToString("yyyy'-'MM'-'dd")+"';"; 
+            cmd.CommandText="UPDATE boncommande SET EtatCommande = '"+etat+"' where CodeC = '"+courriel+"' and dateLivraison ='"+dl.ToString("yyyy'-'MM'-'dd")+"';"; 
             cmd.ExecuteNonQuery();
             connection.Close();
         }
@@ -145,6 +145,7 @@ namespace TESTCONSOLE
             while(reader.Read()){
                     for(int i=0;i<reader.FieldCount;i++){                                   
                         System.Console.Write(reader.GetValue(i).ToString());
+                        System.Console.Write(" | ");
                     }
                     System.Console.WriteLine();
             }
