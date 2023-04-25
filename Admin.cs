@@ -12,7 +12,7 @@ namespace TESTCONSOLE
         string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
         public bool exists = false;
 
-
+        
         #region add admin
         public Admin()
         {
@@ -73,7 +73,7 @@ namespace TESTCONSOLE
 
         #endregion
 
-
+        
         public void NouvelAdmin()
         {
             // Récup automatique de l'IdAdmin
