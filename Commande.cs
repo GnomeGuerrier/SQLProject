@@ -15,6 +15,10 @@ namespace TESTCONSOLE
         public string mdp;
         
     string connectionString = "SERVER=localhost;PORT=3306;DATABASE=fleur;UID=root;PASSWORD=root";
+    /// <summary>
+    /// Permet la création d'une commande basique, commmne à toutes les autres commandes
+    /// </summary>
+    /// <param name="c"> Le client qui passe commande</param>
         public Commande(Clients c){
             this.mdp=c.mdp;
             this.courriel = c.courriel;
@@ -49,6 +53,10 @@ namespace TESTCONSOLE
             }
 
         }
+        /// <summary>
+        /// Permet la commanda d'un bouquet standard
+        /// </summary>
+        /// <param name="magasin">magasin auquel il commande</param>
         public void CommandeStandard(string magasin){
                  this.standard = true;
                 MySqlConnection connection = new MySqlConnection(connectionString);
@@ -119,7 +127,9 @@ namespace TESTCONSOLE
         }
 
 
-
+        /// <summary>
+        /// Cette Fonction permet de prendre en compte combien de commande a fait un client par mois
+        /// </summary>
         public void AjoutBouquetMois(){
             MySqlConnection connection2 = new MySqlConnection(this.connectionString);
             connection2.Open();
@@ -134,7 +144,10 @@ namespace TESTCONSOLE
 
         }
         
-        
+        /// <summary>
+        /// Permet la commande d'un commande personalisée, que ce soit par texte ou item
+        /// </summary>
+        /// <param name="magasin">magasin auquel commander</param>
         public void CommandePersonalisee(string magasin){
 
             System.Console.WriteLine("Voulez-vous faire une commande personalisée par item, ou une description générale? [item/texte]\n");
