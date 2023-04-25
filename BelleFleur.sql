@@ -175,3 +175,36 @@ FROM (
 ) AS AllBouquets;
 
 
+CALL ajout_clients('Alice', 'Smith', 12345, 'alice.smith@example.com', 'alice123', '123 Main St', 1111);
+CALL ajout_clients('Bob', 'Johnson', 23456, 'bob.johnson@example.com', 'bob123', '456 Oak St', 2222);
+CALL ajout_clients('Carol', 'Williams', 34567, 'carol.williams@example.com', 'carol123', '789 Elm St', 3333);
+CALL ajout_clients('David', 'Brown', 45678, 'david.brown@example.com', 'david123', '1012 Pine St', 4444);
+CALL ajout_clients('Eva', 'Jones', 56789, 'eva.jones@example.com', 'eva123', '1314 Maple St', 5555);
+CALL ajout_clients('Frank', 'Garcia', 67890, 'frank.garcia@example.com', 'frank123', '1618 Cedar St', 6666);
+CALL ajout_clients('Grace', 'Miller', 7890, 'grace.miller@example.com', 'grace123', '2022 Birch St', 7777);
+CALL ajout_clients('Hank', 'Davis', 8901, 'hank.davis@example.com', 'hank123', '2426 Chestnut St', 8888);
+CALL ajout_clients('Iris', 'Rodriguez', 9012, 'iris.rodriguez@example.com', 'iris123', '2830 Willow St', 9999);
+CALL ajout_clients('Jack', 'Martinez', 1234, 'jack.martinez@example.com', 'jack123', '3034 Spruce St', 1111);
+
+
+INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`,`prix`,`magasin`)
+VALUES('123 Main St','Happy Birthday!','2023-05-01','alice.smith@example.com','Processing',1,'Bouquet 1',35.99,'Magasin 1');
+
+INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`,`prix`,`magasin`)
+VALUES('456 Oak St','Congratulations!','2023-05-10','bob.johnson@example.com','Processing',1,'Bouquet 2',45.99,'Magasin 2');
+
+INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`NomStandard`,`prix`,`magasin`)
+VALUES('789 Elm St','Happy Anniversary!','2023-05-15','carol.williams@example.com','Processing',1,'Bouquet 3',55.99,'Magasin 3');
+
+INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`Personalisé`,`prix`,`magasin`)
+VALUES('246 Pine St','Get Well Soon!','2023-05-20','david.brown@example.com','Processing',0,'Roses, Lilies, and Orchids',50.99,'Magasin 4');
+
+INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`Personalisé`,`prix`,`magasin`)
+VALUES('135 Maple St','Thank You!','2023-05-25','frank.garcia@example.com','Processing',0,'Sunflowers, Daisies, and Tulips',40.99,'Magasin 5');
+
+INSERT INTO `fleur`.`boncommande`(`adresseLivraison`,`messageAcc`,`dateLivraison`,`CodeC`,`EtatCommande`,`CommandeStandard`,`Personalisé`,`prix`,`magasin`)
+VALUES('864 Birch St','Thinking of You!','2023-05-30','grace.miller@example.com','Processing',0,'Carnations, Chrysanthemums, and Larkspur',45.99,'Magasin 6');
+
+-- Add more INSERT statements for other clients, following the same pattern.
+
+
