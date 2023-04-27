@@ -148,7 +148,7 @@ namespace TESTCONSOLE
         }
 
         public string[] Accessoire(string magasin){
-            System.Console.WriteLine(\n"Bonjour quels accessoires voulez vous acheter? \nVase[5€]\nBoite pour fleurs[10€]\nBoite de chocolat[10€]\nDecoration papier maché[13€]\n");
+            System.Console.WriteLine("\n Bonjour quels accessoires voulez vous acheter? \nVase[5€]\nBoite pour fleurs[10€]\nBoite de chocolat[10€]\nDecoration papier maché[13€]\n");
             string[] listNom = {"Vase","Boite pour fleur","Boite de chocolat","Decoration papier maché"};
         Debut:
             Console.ForegroundColor = ConsoleColor.Blue;

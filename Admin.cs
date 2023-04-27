@@ -376,6 +376,15 @@ namespace TESTCONSOLE
             }
             connection.Close();
         }
+       
+        public void AugmenteStocks(string magasin, int[] Nstocks){
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlCommand cmd = connection.CreateCommand();
+            connection.Open();
+            cmd.CommandText = "UPDATE stock SET gerbera = gerbera +"+Nstocks[0]+", ginger = ginger+"+Nstocks[1]+", glaieul = glaieul+"+Nstocks[2]+",marguerite=marguerite+"+Nstocks[3]+",Rose_rouge=Rose_rouge+"+Nstocks[4]+" where IdMagasin ='"+magasin+"';";
+            cmd.ExecuteNonQuery();
+            System.Console.WriteLine("\nLes stocks ont bien été modifiés!");
+        }
     }
 
 

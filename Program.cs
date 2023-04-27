@@ -322,7 +322,7 @@ namespace TESTCONSOLE
             Console.WriteLine("---- Interface Admin ----\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Vous êtes connecté en tant que " + A.pseudo + " | ID = " + A.idAdmin);
-            Console.WriteLine("[1] Accéder aux statistiques\n[2] Liste commandes\n[3] Modifier état commande\n[4] Vérifier l'état de vos stocks\n[5] Liste commandes par magasin\n[6] Se déconnecter\n\nEntrez le numéro de votre choix:\n");
+            Console.WriteLine("[1] Accéder aux statistiques\n[2] Liste commandes\n[3] Modifier état commande\n[4] Vérifier l'état de vos stocks\n[5] Liste commandes par magasin\n[6] Remplir vos stocks\n[7] Se déconnecter\n\nEntrez le numéro de votre choix:\n");
             Console.ForegroundColor = ConsoleColor.Blue;
             string choix = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
@@ -391,8 +391,45 @@ namespace TESTCONSOLE
                     Console.ReadKey();
                     InterfaceAdmin(A);
                     break;
-                case "6":
+                case "7":
                     MainMenu();
+                    break;
+                case "6":
+                    DebutCmPerso3:
+                Console.WriteLine("\nDans quel magasin voulez vous changer les stocks?");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    string magasinperso1 = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("");
+                    if (magasinperso1 != "Paris" && magasinperso1 != "Lyon" && magasinperso1 != "Lille" && magasinperso1 != "Marseille" && magasinperso1 != "Annecy")
+                    {
+                        goto DebutCmPerso3;
+                    }
+                    int[] nouvellesStocks = new int[5];
+                    System.Console.WriteLine("Combien de nouvelles Gerbera a "+magasinperso1);
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    nouvellesStocks[0] = Convert.ToInt32(Console.ReadLine());
+                    Console.ForegroundColor = ConsoleColor.White;
+                    System.Console.WriteLine("\nCombien de nouvelles Ginger a "+magasinperso1);
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    nouvellesStocks[1] = Convert.ToInt32(Console.ReadLine());
+                    Console.ForegroundColor = ConsoleColor.White;
+                    System.Console.WriteLine("\nCombien de nouvelles Glaieul a "+magasinperso1);
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    nouvellesStocks[2] = Convert.ToInt32(Console.ReadLine());
+                    Console.ForegroundColor = ConsoleColor.White;
+                    System.Console.WriteLine("\nCombien de nouvelles Marguerite a "+magasinperso1);
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    nouvellesStocks[3] = Convert.ToInt32(Console.ReadLine());
+                    Console.ForegroundColor = ConsoleColor.White;
+                    System.Console.WriteLine("\nCombien de nouvelles roses rouges a "+magasinperso1);
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    nouvellesStocks[4] = Convert.ToInt32(Console.ReadLine());
+                    Console.ForegroundColor = ConsoleColor.White;
+                    A.AugmenteStocks(magasinperso1, nouvellesStocks);
+                    System.Console.WriteLine("\nAppuyez sur une touche pour continuer ...");
+                    Console.ReadKey();
+                    InterfaceAdmin(A);
                     break;
                 default:
                     InterfaceAdmin(A);
