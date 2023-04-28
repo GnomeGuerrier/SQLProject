@@ -216,12 +216,15 @@ namespace TESTCONSOLE
                         goto DebutCmPerso1;
                     }
                    
-                    Commande cmd = new Commande(c);
+                  
+                        Commande cmd = new Commande(c);
                     cmd.CommandePersonalisee(magasinperso);
                     cmd.AjoutBouquetMois();
-                    Console.WriteLine("Appuyez sur une touche pour continuer ...");
+                    Console.WriteLine("\nAppuyez sur une touche pour continuer ...");
                     Console.ReadKey();
                     PageClient(c);
+                   
+                    
                     break;
                 case "3":
                     MainMenu();
