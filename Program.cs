@@ -17,7 +17,9 @@ namespace TESTCONSOLE
 
             Console.ReadKey();
         }
-
+        /// <summary>
+        /// Page de bienvenue
+        /// </summary>
         static void WelcomePage()
         {
             Console.Clear();
@@ -33,7 +35,9 @@ namespace TESTCONSOLE
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-
+        /// <summary>
+        /// Page principale, où on peut se connecter, créer un nouveau client, et se connecter en tant qu'admin
+        /// </summary>
         static void MainMenu()
         {
             Console.Clear();
@@ -60,7 +64,9 @@ namespace TESTCONSOLE
                     break;
             }
         }
-
+        /// <summary>
+        /// Page de connection client
+        /// </summary>
         static void PageConnexion()
         {
             Debut:
@@ -104,7 +110,9 @@ namespace TESTCONSOLE
 
 
         #region Inscription
-
+        /// <summary>
+        /// Page d'inscription d'un nouveau client
+        /// </summary>
         static void PageInscription()
         {
             Console.Clear();
@@ -144,7 +152,10 @@ namespace TESTCONSOLE
 
 
         }
-
+        /// <summary>
+        /// methode utilisé pour tester si un mdp est bien correct, dans sa création
+        /// </summary>
+        /// <returns>le mdp modifié</returns>
         public static string DefinitionMDP()
         {
             Console.WriteLine("\nDéfinissez votre mot-de-passe :\n");
@@ -171,7 +182,10 @@ namespace TESTCONSOLE
         }
 
         #endregion
-
+        /// <summary>
+        /// Page d'action du client
+        /// </summary>
+        /// <param name="c">le client c</param>
         private static void PageClient(Clients c)
         {
             Console.Clear();
@@ -237,7 +251,9 @@ namespace TESTCONSOLE
 
 
         #region Administration
-
+        /// <summary>
+        /// Page de connection d'administrateur
+        /// </summary>
         private static void PageAdmin()
         {
             Console.Clear();
@@ -261,7 +277,9 @@ namespace TESTCONSOLE
                     break;
             }
         }
-
+        /// <summary>
+        /// Page inscription d'un nouveau admin
+        /// </summary>
         private static void InscriptionAdmin()
         {
             
@@ -274,7 +292,9 @@ namespace TESTCONSOLE
             InterfaceAdmin(A);
 
         }
-
+        /// <summary>
+        /// Page de connection d'un admin
+        /// </summary>
         static void ConnexionAdmin()
         {
             Debut:
@@ -315,7 +335,10 @@ namespace TESTCONSOLE
             InterfaceAdmin(A);
 
         }
-
+        /// <summary>
+        /// L'interface administrateur
+        /// </summary>
+        /// <param name="A">l'admin en question</param>
         private static void InterfaceAdmin(Admin A)
         {
             string courriel = "";

@@ -212,7 +212,7 @@ namespace TESTCONSOLE
             connection.Close();
         }
         /// <summary>
-        /// Permet d'afficher toutes les stats intéressantes que l'admin pourrait voiloir
+        /// Permet d'afficher toutes les stats intéressantes que l'admin pourrait vouloir
         /// </summary>
         public void Stats(){
 
@@ -354,7 +354,9 @@ namespace TESTCONSOLE
             }
             connection.Close();
         }
-
+        /// <summary>
+        /// Affiche les commandes par magasin
+        /// </summary>
         public void AffCommandeParMag()
         {
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -376,7 +378,11 @@ namespace TESTCONSOLE
             }
             connection.Close();
         }
-       
+        /// <summary>
+        /// Permet d'augmenter les stocks d'un magasin
+        /// </summary>
+        /// <param name="magasin">les stocks à augmenter</param>
+        /// <param name="Nstocks">la quantité de stocks à augemnter</param>
         public void AugmenteStocks(string magasin, int[] Nstocks){
             MySqlConnection connection = new MySqlConnection(connectionString);
             MySqlCommand cmd = connection.CreateCommand();

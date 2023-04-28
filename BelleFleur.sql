@@ -99,7 +99,10 @@ CREATE TABLE IF NOT EXISTS BonCommande(
     prix DECIMAL(5,2),
     magasin VARCHAR(40),
     PRIMARY KEY(codeC,dateCreation),
-    FOREIGN KEY(CodeC) REFERENCES Clients(courriel)
+    FOREIGN KEY(CodeC) REFERENCES Clients(courriel),
+    FOREIGN KEY(magasin) REFERENCES MAGASIN(nom),
+    FOREIGN KEY(NomStandard) REFERENCES commande_standard(nom)
+
 );
 DROP TABLE IF EXISTS commande_standard;
 CREATE TABLE IF NOT EXISTS commande_standard(
@@ -120,11 +123,8 @@ CREATE TABLE IF NOT EXISTS administrateurs(
 );
 DROP TABLE IF EXISTS ACCESSOIRES;
 CREATE TABLE IF NOT EXISTS ACCESSOIRES(
-Ville VARCHAR(40),
-CodeC VARCHAR(40),
-Accessoire VARCHAR(400),
-Prix DECIMAL (5,2),
-dateCreation DATETIME DEFAULT CURRENT_TIMESTAMP
+Accessoire VARCHAR(400) PRIMARY KEY,
+Prix DECIMAL(5,2)
 );
 
 INSERT INTO `fleur`.`commande_standard` (`nom`,`Compo_Fleur`,`prix`,`categorie`)VALUES ('Gros Merci','Arrangement floral avec marguerites et verdure',45,'toute occasion');
@@ -145,6 +145,13 @@ INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerit
 INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Annecy',80,70,50,120,70);
 INSERT INTO `fleur`.`stock` (`IdMagasin`,`Gerbera`,`Ginger`,`Glaieul`,`Marguerite`,`Rose_rouge`)VALUES ('Lille',140,170,210,130,100);
 
+
+
+
+INSERT INTO `fleur`.`ACCESSOIRES` (`ACCESSOIRE`,`prix`) VALUES ('Vase',5);
+INSERT INTO `fleur`.`ACCESSOIRES` (`ACCESSOIRE`,`prix`) VALUES ('Boite pour fleur',10);
+INSERT INTO `fleur`.`ACCESSOIRES` (`ACCESSOIRE`,`prix`) VALUES ('Boite de chocolat',10);
+INSERT INTO `fleur`.`ACCESSOIRES` (`ACCESSOIRE`,`prix`) VALUES ('decoraction papier maché',13);
 
 SELECT * FROM Clients where courriel = '155555555555555555' and mdp= '1';
 
